@@ -10,7 +10,7 @@ function createWindow() {
 	win = new BrowserWindow({
 		width:1200, 
 		height:700, 
-		icon:__dirname+'/img/sysinfo.png',
+		icon:__dirname+'/static/img/logo/favicon.png',
 		webPreferences: {
 			nodeIntegration: true
 		}
