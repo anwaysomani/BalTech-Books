@@ -1,0 +1,25 @@
+{
+  "name": "baltech-books",
+  "version": "1.0.0",
+  "description": "Desktop Application for Book-Keeping",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anwaysomani/BalTech-Books.git"
+  },
+  "keywords": [
+    "Bookkeeping"
+  ],
+  "author": "Anway Somani, Mansi Sawant",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anwaysomani/BalTech-Books/issues"
+  },
+  "homepage": "https://github.com/anwaysomani/BalTech-Books#readme",
+  "dependencies": {
+    "electron": "^4.1.4"
+  }
+}
