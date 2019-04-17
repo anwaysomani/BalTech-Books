@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/anwaysomani/BalTech-Books#readme",
   "dependencies": {
-    "electron": "^4.1.4"
+    "electron": "^4.1.4",
+    "electron-reload": "^1.4.0"
   }
 }
