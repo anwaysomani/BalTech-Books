@@ -1,13 +1,15 @@
-var attempt = 3;
-
 function validate() {
-	var username = document.getElementById("username").value;
-	var password = document.getElementById("password").value;
+	// Extract user information from form(by Id element)
+	var passcode = document.getElementById("passcode").value;
 
-	if(username == "Mansi" && password == "mansi123") {
+	// Actual function to validate if user found guilty
+	if(passcode == "daily") {
+		// Action to perform if successful
 		alert("Login Succesful!");
+		window.location = "pages/personalinfo.html";
 		return false;
 	} else {
+		// Action to perform if not successful
 		alert("Seems an error!");
 	}
 }
