@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'organizations',
     'corec',
+    'invoice',
 
     # required
     'widget_tweaks',
@@ -128,3 +129,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_REDIRECT_URL = 'dashboard/'
+
+# Altering default user model
+AUTH_USER_MODEL = 'accounts.User'
