@@ -1,0 +1,236 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'reqs/headerBar.html' %}
+
+	<style type="text/css">
+        #main { width:960px; margin: 0px auto; border:solid 1px #b2b3b5; -moz-border-radius:10px; padding:20px; background-color:#f6f6f6;}
+        #header { text-align:center; border-bottom:solid 1px #b2b3b5; margin: 0 0 20px 0; }
+        fieldset { border:none; width:320px;}
+        legend { font-size:18px; margin:0px; padding:10px 0px; color:#b0232a; font-weight:bold;}
+        label { display:block; margin:15px 0 5px;}
+        input[type=text], input[type=password] { width:300px; padding:5px; border:solid 1px #000;}
+        .prev, .next { background-color:#b0232a; padding:5px 10px; color:#fff; text-decoration:none;}
+        .prev:hover, .next:hover { background-color:#000; text-decoration:none;}
+        .prev { float:left;}
+        .next { float:right;}
+        #steps { list-style:none; width:100%; overflow:hidden; margin:0px; padding:0px;}
+        #steps li {font-size:24px; float:left; padding:10px; color:#b0b1b3;}
+        #steps li span {font-size:11px; display:block;}
+        #steps li.current { color:#000;}
+        #makeWizard { background-color:#b0232a; color:#fff; padding:5px 10px; text-decoration:none; font-size:18px;}
+        #makeWizard:hover { background-color:#000;}
+	</style>
+
+</head>
+
+<body>
+	{% include 'reqs/navbar.html' %}
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<h1>Under Construction...</h1>
+		<!-- <div>
+			<form method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit">Submit Data</button>
+			</form>
+		</div> -->
+		<!-- <div class="col-md-4">
+			{% for user in users %}
+				<div class="panel panel-default">
+					<div class="panel-heading">New Invoice
+						<span class="pull-right clickable panel-toggle">
+							<em class="fa fa-toggle-up"></em>
+						</span>
+					</div>
+					<div class="panel-body">
+						<button type="button" class="btn btn-md btn-primary" style="width: 100%;">{{ user.first_name }}</button>
+						<button type="button" class="btn btn-md btn-primary" style="width: 100%;">{{ user.last_name }}</button>
+						<button type="button" class="btn btn-md btn-primary" style="width: 100%;">{{ user.email }}</button>
+						<button type="button" class="btn btn-md btn-primary" style="width: 100%;">{{ user.state }}</button>
+					</div>
+				</div>
+			{% endfor %}
+		</div> -->
+
+       <form id="SignupForm" action="">
+        <fieldset>
+            <legend> Account information</legend>
+            <label for="Name">Name</label>
+            <input id="Name" type="text" />
+            <label for="Email">Email</label>
+            <input id="Email" type="text" />
+            <label for="Password">Password</label>
+            <input id="Password" type="password" />
+        </fieldset>
+        <fieldset>
+            <legend> Company information</legend>
+            <label for="CompanyName">Company Name</label>
+            <input id="CompanyName" type="text" />
+            <label for="Website">Website</label>
+            <input id="Website" type="text" />
+            <label for="CompanyEmail">CompanyEmail</label>
+            <input id="CompanyEmail" type="text" />
+        </fieldset>
+        <fieldset>
+            <legend> </legend>
+            <label for="CompanyName">Company Name</label>
+            <input id="CompanyName" type="text" />
+            <label for="Website">Website</label>
+            <input id="Website" type="text" />
+            <label for="CompanyEmail">CompanyEmail</label>
+            <input id="CompanyEmail" type="text" />
+        </fieldset>
+        <fieldset>
+            <legend> Billing information</legend>
+            <label for="NameOnCard">Name on Card</label>
+            <input id="NameOnCard" type="text" />
+            <label for="CardNumber">Card Number</label>
+            <input id="CardNumber" type="text" />
+            <label for="CreditcardMonth">Expiration</label>
+            <select id="CreditcardMonth">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <select id="CreditcardYear">
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+            </select>        
+            <label for="Address1">Address 1</label>
+            <input id="Address1" type="text" />
+            <label for="Address2">Address 2</label>
+            <input id="Address2" type="text" />
+            <label for="City">City</label>
+            <input id="City" type="text" />
+            <label for="City">City</label>
+            <select id="Country">
+			    <option value="CA">Canada</option>
+                <option value="US">United States of America</option>
+                <option value="GB">United Kingdom (Great Britain)</option>
+                <option value="AU">Australia</option>
+                <option value="JP">Japan</option>
+                <option value="AF">Afghanistan</option>
+                
+            </select>
+        </fieldset>
+        <p>
+            <input id="SaveAccount" type="button" value="Submit form" />
+        </p>
+        </form>
+    </div>
+
+
+</div>
+
+	</div>
+
+
+	{% include 'reqs/footerScripts.html' %}
+
+	<script type="text/javascript">
+		/* Created by jankoatwarpspeed.com */
+
+$(document).ready(function(){
+            $("#SignupForm").formToWizard({ submitButton: 'SaveAccount' })
+        });
+
+
+(function($) {
+    $.fn.formToWizard = function(options) {
+        options = $.extend({  
+            submitButton: "" 
+        }, options); 
+        
+        var element = this;
+
+        var steps = $(element).find("fieldset");
+        var count = steps.size();
+        var submmitButtonName = "#" + options.submitButton;
+        $(submmitButtonName).hide();
+
+        // 2
+        $(element).before("<ul id='steps'></ul>");
+
+        steps.each(function(i) {
+            $(this).wrap("<div id='step" + i + "'></div>");
+            $(this).append("<p id='step" + i + "commands'></p>");
+
+            // 2
+            var name = $(this).find("legend").html();
+            $("#steps").append("<li id='stepDesc" + i + "'>Step " + (i + 1) + "<span>" + name + "</span></li>");
+
+            if (i == 0) {
+                createNextButton(i);
+                selectStep(i);
+            }
+            else if (i == count - 1) {
+                $("#step" + i).hide();
+                createPrevButton(i);
+            }
+            else {
+                $("#step" + i).hide();
+                createPrevButton(i);
+                createNextButton(i);
+            }
+        });
+
+        function createPrevButton(i) {
+            var stepName = "step" + i;
+            $("#" + stepName + "commands").append("<br><a href='#' id='" + stepName + "Prev' class='prev'>< Back</a>");
+
+            $("#" + stepName + "Prev").bind("click", function(e) {
+                $("#" + stepName).hide();
+                $("#step" + (i - 1)).show();
+                $(submmitButtonName).hide();
+                selectStep(i - 1);
+            });
+        }
+
+        function createNextButton(i) {
+            var stepName = "step" + i;
+            $("#" + stepName + "commands").append("<a href='#' id='" + stepName + "Next' class='next'>Next ></a>");
+
+            $("#" + stepName + "Next").bind("click", function(e) {
+                $("#" + stepName).hide();
+                $("#step" + (i + 1)).show();
+                if (i + 2 == count)
+                    $(submmitButtonName).show();
+                selectStep(i + 1);
+            });
+        }
+
+        function selectStep(i) {
+            $("#steps li").removeClass("current");
+            $("#stepDesc" + i).addClass("current");
+        }
+
+    }
+})(jQuery); 
+	</script>
+
+	
+
+</body>
+</html>
