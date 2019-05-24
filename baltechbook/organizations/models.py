@@ -7,14 +7,18 @@ from PIL import Image
 class organization_table(models.Model):
     organization_id = models.IntegerField(primary_key=True)
     organization_name = models.CharField(max_length=50)
-    phoneNumber = models.CharField(max_length=10)
+    phoneNumber = models.CharField(max_length=10, blank=True)
     mobileNumber = models.CharField(max_length=10)
     whatsappNumber = models.CharField(max_length=10)
     salesEmail = models.EmailField()
     infoEmail = models.EmailField(null=True)
-    logo = models.ImageField(null=True)
+    logo = models.ImageField(null=True, blank=True)
     addressLine1 = models.CharField(max_length=200)
     addressLine2 = models.CharField(max_length=200)
     city = models.CharField(max_length=30)
     pincode = models.IntegerField(validators=[RegexValidator(r'^\d{1,10}$')], null=True)
+    org_code = models.CharField(max_length=3)
+
+    def __unicode__(self):
+        return self.organization_name
 
