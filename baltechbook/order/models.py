@@ -8,18 +8,18 @@ from stock.models import products_table
 # Order 
 class order_table(models.Model):
     order_id = models.IntegerField(primary_key=True)
-    customer_id = models.ForeignKey(customer_table)
-    organization_id = models.ForeignKey(organization_table)
-    customer_address_id = models.ForeignKey(customer_address_table) # Billing address
-    customer_address_id = models.ForeignKey(customer_address_table) # Shipping address
-    employee_id = models.ForeignKey(employee_table)
-    order_number = models.CharField(max_length=9)
-    creation_date = models.DateField(auto_now=True)
-    creation_time = models.TimeField(auto_now=True)
-    status = models.CharField(max_length=11)
+    customer_id = models.ForeignKey(customer_table, blank=True, null=True)
+    organization_id = models.ForeignKey(organization_table, null=True, blank=True)
+    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True) # Billing address
+    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True) # Shipping address
+    employee_id = models.ForeignKey(employee_table, null=True, blank=True)
+    order_number = models.CharField(max_length=9, null=True, blank=True)
+    creation_date = models.DateField(auto_now=True, null=True, blank=True)
+    creation_time = models.TimeField(auto_now=True, null=True, blank=True)
+    status = models.CharField(max_length=11, null=True, blank=True)
 
     def __unicode__(self):
-        return self.order_id
+        return self.status
 
     class Meta:
         verbose_name = "Order"
