@@ -21,4 +21,10 @@ urlpatterns = [
     url('accounts/', include('django.contrib.auth.urls')),
     url('', include('accounts.urls')), 
     url('', include('corec.urls')),
+    url('', include('customer.urls')),
+    url('', include('dev.urls')),
+    url('', include('invoice.urls')),
+    url('', include('order.urls')),
+    url('', include('organizations.urls')),
+    url('', include('stock.urls')),
 ]

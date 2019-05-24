@@ -6,53 +6,25 @@
 	{% include 'reqs/headerBar.html' %}
 </head>
 
+<!-- 
+	Pattern:
+	- order_id & order_num
+	- Product to be purchased
+	- Customer information
+	- Checkout
+-->
+
 <body>
 	{% include 'reqs/navbar.html' %}
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>Invoice</h2>
+				<h2>New Invoice</h2>
 			</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Contact Form
-				<ul class="pull-right panel-settings panel-button-tab-right">
-					<li class="dropdown">
-						<a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-							<em class="fa fa-cogs"></em>
-						</a>
-						<ul class="dropdown-menu dropdown-menu-right">
-							<li>
-								<ul class="dropdown-settings">
-									<li>
-										<a href="#">
-											<em class="fa fa-cog"></em> Settings 1
-										</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">
-											<em class="fa fa-cog"></em> Settings 2
-										</a>
-									</li>
-									<li class="divider"></li>
-									<li>
-										<a href="#">
-											<em class="fa fa-cog"></em> Settings 3
-										</a>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
 
-				<span class="pull-right clickable panel-toggle panel-button-tab-left">
-					<em class="fa fa-toggle-up"></em>
-				</span>
-			</div>
+		<div class="panel panel-default">
 			<div class="panel-body">
 				<form class="form-horizontal" action="" method="post">
 					<fieldset>
@@ -90,18 +62,11 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">New Invoice
-					<span class="pull-right clickable panel-toggle">
-						<em class="fa fa-toggle-up"></em>
-					</span>
-				</div>
-				<div class="panel-body">
-					<button type="button" class="btn btn-md btn-primary" style="width: 100%;">Create a New Invoice</button>
-				</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
 			</div>
 		</div>
+			
 	</div>
 
 {% include 'reqs/footerScripts.html' %}

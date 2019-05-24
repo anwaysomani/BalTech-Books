@@ -3,7 +3,5 @@ from . import views
 
 urlpatterns = [
     url(r'dashboard/', views.dashboard, name='dashboard'),
-    url(r'invoice/', views.invoice, name='invoice'),
-
     url(r'blank/', views.blank, name='blank'),
 ]

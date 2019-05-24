@@ -11,22 +11,6 @@ def dashboard(request):
     }
     return render(request, 'dashboard.html', context)
 
-def invoice(request):
-    return render(request, 'invoice.html', {})
-
 def blank(request):
-    #form = UserForm()
-    #users = User.objects.all()
-    #context = {
-        #'form': form,
-    #    'users': users,
-    #}
-    
-    #if request.method == "POST":
-        #form = UserForm(request.POST or None)
-    #    if form.is_valid():
-    #        form.save()
-    #else:
-        #form = UserForm()
     return render(request, 'blank.html', context)
 

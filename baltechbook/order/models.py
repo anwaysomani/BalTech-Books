@@ -18,6 +18,13 @@ class order_table(models.Model):
     creation_time = models.TimeField(auto_now=True)
     status = models.CharField(max_length=11)
 
+    def __unicode__(self):
+        return self.order_id
+
+    class Meta:
+        verbose_name = "Order"
+        verbose_name_plural = "Order's"
+
 
 # Product orders
 class product_order_table(models.Model):
