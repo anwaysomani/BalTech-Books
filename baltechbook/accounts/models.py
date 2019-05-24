@@ -63,7 +63,7 @@ class employee_table(AbstractBaseUser):
     joining_date = models.DateField(auto_now=True, null=True, blank=True)
     last_login = models.DateTimeField(null=True)
     termination_date = models.DateField(null=True, blank=True)
-    is_user = models.BooleanField()
+    is_user = models.NullBooleanField()
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
 
@@ -73,7 +73,7 @@ class employee_table(AbstractBaseUser):
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['employee_id', 'name', 'mobileNumber']
+    REQUIRED_FIELDS = ['employee_id', 'first_name', 'mobileNumber']
 
     def get_short_name(self):
         return self.first_name
