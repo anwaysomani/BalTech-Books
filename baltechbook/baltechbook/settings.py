@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'organizations',
     'corec',
     'invoice',
+    'stock',
+    'customer',
+    'order',
+    'dev',
 
     # required
     'widget_tweaks',
@@ -114,13 +118,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+#TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+TIME_ZONE = 'Asia/Kolkata'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -131,4 +137,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = 'dashboard/'
 
 # Altering default user model
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'accounts.employee_table'
+
+
