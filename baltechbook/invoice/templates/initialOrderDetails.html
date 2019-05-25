@@ -26,48 +26,31 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form class="form-horizontal" action="" method="post">
+				<form class="form-horizontal" action="" method="POST">
+					{% csrf_token %}
+					{% for field in form.visible_fields %}
 					<!-- <fieldset>-->
 						<div class="form-group">
-							<label class="col-md-3 control-label" for="name">Order ID</label>
+							<label class="col-md-3 control-label" for="name">{{ field.label_tag }}</label>
 							<div class="col-md-9">
-								<input id="name" name="name" type="text" placeholder="{{ orderId }}" class="form-control">
+								{{ field }}
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="name">Order Number</label>
-							<div class="col-md-9">
-								<input id="name" name="name" type="text" placeholder="{{ order_code }}" class="form-control">
-							</div>
+					{% endfor %}
+					<div class="form-group">
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-default btn-md pull-right">
+								Proceed to Selecting Products
+							</button>
 						</div>
-
-						<!-- <div class="form-group">
-							<label class="col-md-3 control-label" for="email">Your E-mail</label>
-							<div class="col-md-9">
-								<input id="email" name="email" type="text" placeholder="Your email" class="form-control">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="message">Your message</label>
-							<div class="col-md-9">
-								<textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-12 widget-right">
-								<button type="submit" class="btn btn-default btn-md pull-right">Submit</button>
-							</div>
-						</div>
-					</fieldset> -->
+					</div>
 				</form>
 			</div>
 		</div>
-		<div class="panel panel-default">
+		<!-- <div class="panel panel-default">
 			<div class="panel-body">
 			</div>
-		</div>
+		</div> -->
 			
 	</div>
 
