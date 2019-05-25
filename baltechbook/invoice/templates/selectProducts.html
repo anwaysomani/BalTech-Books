@@ -26,106 +26,48 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<!-- <form class="form-horizontal" action="" method="POST"> -->
-					<!-- <fieldset>-->
-						<!-- <div class="form-group">
-							<label class="col-md-3 control-label" for="name">Order ID</label>
-							<div class="col-md-9">
-								<input id="name" name="name" type="text" placeholder="" class="form-control" disabled>
+				<form method="POST">
+					{% csrf_token %}
+					<div class="form-row">
+						{% for field in form %}
+							<div class="form-group col-md-6">
+								<label for="inputPassword4">{{ field.label_tag }}</label>
+								{{ field }}
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="name">Order Number</label>
-							<div class="col-md-9">
-								<input id="name" name="name" type="text" placeholder="" class="form-control" disabled>
-								<h2>{{ id }}</h2>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-12">
-								<button type="submit" class="btn btn-default btn-md pull-right">Proceed to Selecting Products</button">
-							</div>
-						</div> -->
-
-					<!-- </fieldset>  -->
-				<!-- </form> -->
-				{{ form }}
-				<form>
-				  <div class="form-row">
-				    <div class="form-group col-md-6">
-				      <label for="inputEmail4">Email</label>
-				      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-				    </div>
-				    <div class="form-group col-md-6">
-				      <label for="inputPassword4">Password</label>
-				      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-				    </div>
-				  </div>
-				  <!-- <div class="form-group">
-				    <label for="inputAddress2">Address 2</label>
-				    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-				  </div> -->
-				  <div class="form-row">
-				    <!-- <div class="form-group col-md-6">
-				      <label for="inputCity">City</label>
-				      <input type="text" class="form-control" id="inputCity">
-				    </div> -->
-				    <!-- <div class="form-group col-md-4">
-				      <label for="inputState">State</label>
-				      <select id="inputState" class="form-control">
-				        <option selected>Choose...</option>
-				        <option>...</option>
-				      </select>
-				    </div> -->
-				    <!-- <div class="form-group col-md-2">
-				      <label for="inputZip">Zip</label>
-				      <input type="text" class="form-control" id="inputZip">
-				    </div>
-				  </div> -->
-				  <!-- <div class="form-group">
-				    <div class="form-check">
-				      <input class="form-check-input" type="checkbox" id="gridCheck">
-				      <label class="form-check-label" for="gridCheck">
-				        Check me out
-				      </label>
-				    </div>
-				  </div> -->
-				  <button type="submit" class="btn btn-primary">Sign in</button>
+						{% endfor %}
+					</div>
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-default btn-md" name="add_to_cart">Add To Cart <i class="fas fa-shopping-cart"></i></button>
 				</form>
+					<a href="{%  url 'customer-records' id=id %}"><button class="btn btn-default btn-md pull-right">Proceed to Customer Information <i class="fas fa-id-card"></i></button></a>	
+			</div>
 			</div>
 		</div>
 
 		<!-- Selected products for the order -->
 		<div class="panel panel-default">
 			<div class="panel-body">
+				<h2>Cart Products</h2>
 				<table class="table table-hover">
 				  <thead>
 				    <tr>
 				      <th scope="col">#</th>
-				      <th scope="col">First</th>
-				      <th scope="col">Last</th>
-				      <th scope="col">Handle</th>
+				      <th scope="col">Product</th>
+				      <th scope="col">Quantity</th>
+				      <th scope="col">Delivery Date</th>
+				      <th scope="col">Action</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td colspan="2">Larry the Bird</td>
-				      <td>@twitter</td>
-				    </tr>
+				  	{% for products in products_list %}
+				  		<tr>
+					      <th scope="row">{{ forloop.counter }}</th>
+					      <td>{{ products.product_id }}</td>
+					      <td>{{ products.quantity }}</td>
+					      <td>{{ products.delivery_date }}</td>
+					      <td><button class="btn btn-danger">Remove</button></td>
+					    </tr>
+				  	{% endfor %}
 				  </tbody>
 				</table>
 			</div>
@@ -133,7 +75,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
-				
+				<h2>Add a New Product</h2>(undergoing construction)
 			</div>
 		</div>
 			

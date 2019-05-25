@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from organizations.models import *
-from .constants import *
+from invoice.constants import STATES, COUNTRIES
 
 import uuid
 
@@ -56,8 +56,8 @@ class employee_table(AbstractBaseUser):
     address = models.CharField(max_length=200, null=True, blank=True)
     city = models.CharField(max_length=30, null=True, blank=True)
     pincode = models.IntegerField(null=True)
-    state = models.CharField(max_length=35, null=True)
-    country = models.CharField(max_length=50, null=True)
+    state = models.CharField(max_length=35, null=True, choices=STATES)
+    country = models.CharField(max_length=50, null=True, choices=COUNTRIES)
     organization_id = models.ForeignKey(organization_table, null=True, blank=True)
     privilege_id = models.ForeignKey(employee_privilege_table, null=True, blank=True)
     joining_date = models.DateField(auto_now=True, null=True, blank=True)

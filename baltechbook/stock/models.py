@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from customer.models import customer_table
+from invoice.constants import GST_RATE, REFILL_REQUEST_TYPE
 
 # Product list table
 class products_table(models.Model):
@@ -8,11 +9,14 @@ class products_table(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(null=True, blank=True)
     actual_price = models.DecimalField(max_digits=7, decimal_places=2)
-    cgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
-    sgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
-    igst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    cgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE)
+    sgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE)
+    igst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE)
     post_tax_price = models.DecimalField(max_digits=7, decimal_places=2)
     launch_date = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 # Stock Records
@@ -39,5 +43,5 @@ class refill_request_table(models.Model):
     customer_id = models.ForeignKey(customer_table, null=True, blank=True)
     request_quantity = models.IntegerField()
     request_date = models.DateTimeField(auto_now=True)
-    request_status = models.CharField(max_length=10)
+    request_status = models.CharField(max_length=10, choices=REFILL_REQUEST_TYPE)
 

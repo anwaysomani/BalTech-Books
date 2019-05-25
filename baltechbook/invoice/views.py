@@ -49,7 +49,6 @@ def orderInitDetails(request):
     else:
         form = order_init_details(initial=initial_data)
 
-
     context = {
         'orderId': orderId,
         'order_code': order_code,
@@ -60,13 +59,35 @@ def orderInitDetails(request):
 
 # Selecting products
 def select_products_for_order(request, id):
-    
     form = new_order_for_products(request.POST or None)
+    product_current = product_order_table.objects.filter(order_id=id)
     
     context = {
         'id': id,
         'form': form,
+        'products_list': product_current,
     }
+    
+    print("Step -1")
+    if request.method=='POST':
+        print("Step 0")
+        form = new_order_for_products(request.POST)
+        print("Step 8")
+        if form.is_valid():
+            print("Enter")
+            product_id = form.cleaned_data['product_id']
+            print("Step 1")
+            quantity = form.cleaned_data['quantity']
+            order_id = id
+            cal1_for_post_tax_amount = product_order_table.objects.filter(product_id=product_id)
+            post_tax_amount = cal1_for_post_tax_amount * quantity
+            print("Step 2")
+            form.save()
+            print("Step 3")
+            return redirect('product-order', id)
 
     return render(request, 'selectProducts.html', context)
 
+# Customer Record
+def accept_customer_record(request, id):
+    return render(request, 'customer-record.html', {})
