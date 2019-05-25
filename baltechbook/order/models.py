@@ -7,28 +7,30 @@ from stock.models import products_table
 
 # Order 
 class order_table(models.Model):
-    order_id = models.IntegerField(primary_key=True)
-    customer_id = models.ForeignKey(customer_table, blank=True, null=True)
-    organization_id = models.ForeignKey(organization_table, null=True, blank=True)
-    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True) # Billing address
-    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True) # Shipping address
-    employee_id = models.ForeignKey(employee_table, null=True, blank=True)
-    order_number = models.CharField(max_length=9, null=True, blank=True)
-    creation_date = models.DateField(auto_now=True, null=True, blank=True)
-    creation_time = models.TimeField(auto_now=True, null=True, blank=True)
-    status = models.CharField(max_length=11, null=True, blank=True)
+    order_id = models.AutoField(primary_key=True)
+    customer_id = models.ForeignKey(customer_table, blank=True, null=True, default="")
+    organization_id = models.ForeignKey(organization_table, null=True, blank=True, default="")
+    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True, default="") # Billing address
+    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True, default="") # Shipping address
+    employee_id = models.ForeignKey(employee_table, null=True, blank=True, default="")
+    order_number = models.CharField(max_length=11)
+    creation_date = models.DateField(auto_now=True, null=True)
+    creation_time = models.TimeField(auto_now=True, null=True)
+    status = models.CharField(max_length=11, null=True, default="")
+    random = models.CharField(max_length=10, null=True, default="")
 
     def __unicode__(self):
-        return self.status
+        return self.order_number
 
     class Meta:
         verbose_name = "Order"
-        verbose_name_plural = "Order's"
+        verbose_name_plural = "Orders"
+        #unique_together  = (("order_id", "order_number"))
 
 
 # Product orders
 class product_order_table(models.Model):
-    product_order_id = models.IntegerField(primary_key=True)
+    product_order_id = models.AutoField(primary_key=True)
     order_id = models.ForeignKey(order_table)
     product_id = models.ForeignKey(products_table)
     quantity = models.IntegerField()
