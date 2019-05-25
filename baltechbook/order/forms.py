@@ -6,15 +6,15 @@ from invoice.constants import *
 class new_order_for_products(forms.ModelForm):
     class Meta:
         model = product_order_table
-        fields = {'product_id', 'quantity', 'delivery_date'}
+        fields = {'order_id', 'product_id', 'quantity', 'delivery_date'}
         widgets = {
-            'product_id': forms.Select(attrs={'class': "form-control"}),
-            #'product_id': forms.ChoiceField(),
-            #'product_id': forms.ModelChoiceField(queryset=products_table.objects.all(), empty_label=None),
-            'quantity': forms.TextInput(attrs={'class': "form-control"}),
-            #'quantity': forms.Select(attrs={'class':"form-control"}),
-            'delivery_date': forms.DateInput(attrs={'class': "form-control"})
+            'order_id': forms.HiddenInput()
         }
+        #widgets = {
+        #    'product_id': forms.Select(attrs={'class': "form-control"}),
+        #    'quantity': forms.NumberInput(attrs={'class': "form-control"}),
+        #    'delivery_date': forms.TextInput(attrs={'class': "form-control"})
+        #}
 
         labels = {
             'product_id': 'Select Product'
@@ -23,4 +23,6 @@ class new_order_for_products(forms.ModelForm):
     def __init__(self, id, *args, **kwargs):
         super(new_order_for_products, self).__init__(*args, **kwargs)
         self.fields['product_id'].queryset = products_table.objects.all()
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 

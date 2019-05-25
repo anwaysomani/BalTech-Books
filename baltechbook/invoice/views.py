@@ -5,6 +5,7 @@ from organizations.models import organization_table
 from order.models import *
 from order.forms import new_order_for_products
 from invoice.forms import order_init_details
+from stock.models import products_table
 
 def invoice(request):
     return render(request, 'invoice.html', {})
@@ -59,32 +60,37 @@ def orderInitDetails(request):
 
 # Selecting products
 def select_products_for_order(request, id):
-    form = new_order_for_products(request.POST or None)
-    product_current = product_order_table.objects.filter(order_id=id)
-    
+    product_current = product_order_table.objects.filter(order_id_id=id)
+   
+    initial_data = {
+        'order_id_id': id
+    }
+    form = new_order_for_products(request.POST, initial_data)
+
     context = {
         'id': id,
         'form': form,
         'products_list': product_current,
     }
     
-    print("Step -1")
     if request.method=='POST':
-        print("Step 0")
+        # Printing all accepted data to see error
+
+
+
+
         form = new_order_for_products(request.POST)
-        print("Step 8")
+        order_id_id = id
+        prod_id = request.POST.get('product_id')
+        quantity = request.POST.get('quantity')
+        val1 = products_table.objects.get(product_id=prod_id)
+        form.post_tax_amount = int(val1.post_tax_price) * quantity
         if form.is_valid():
-            print("Enter")
-            product_id = form.cleaned_data['product_id']
-            print("Step 1")
-            quantity = form.cleaned_data['quantity']
-            order_id = id
-            cal1_for_post_tax_amount = product_order_table.objects.filter(product_id=product_id)
-            post_tax_amount = cal1_for_post_tax_amount * quantity
-            print("Step 2")
             form.save()
             print("Step 3")
             return redirect('product-order', id)
+        else:
+            print("Error")
 
     return render(request, 'selectProducts.html', context)
 

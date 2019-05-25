@@ -29,7 +29,7 @@
 				<form method="POST">
 					{% csrf_token %}
 					<div class="form-row">
-						{% for field in form %}
+						{% for field in form.visible_fields %}
 							<div class="form-group col-md-6">
 								<label for="inputPassword4">{{ field.label_tag }}</label>
 								{{ field }}

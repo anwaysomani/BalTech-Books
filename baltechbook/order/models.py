@@ -4,7 +4,7 @@ from organizations.models import organization_table
 from customer.models import customer_address_table, customer_table
 from accounts.models import employee_table
 from stock.models import products_table
-from invoice.constants import MODE_OF_PAYMENT, ORDER_STATUS
+from invoice.constants import MODE_OF_PAYMENT, ORDER_STATUS, QUANTITY
 
 # Order 
 class order_table(models.Model):
@@ -33,9 +33,9 @@ class product_order_table(models.Model):
     product_order_id = models.AutoField(primary_key=True)
     order_id = models.ForeignKey(order_table)
     product_id = models.ForeignKey(products_table)
-    quantity = models.IntegerField(choices=MODE_OF_PAYMENT)
-    post_tax_amount = models.DecimalField(max_digits=7, decimal_places=2)
-    delivery_date = models.DateField()
+    quantity = models.IntegerField(choices=QUANTITY)
+    post_tax_amount = models.DecimalField(max_digits=7, decimal_places=2, null=True)
+    delivery_date = models.CharField(max_length=10)
 
 
 # Payment
