@@ -63,7 +63,7 @@ def select_products_for_order(request, id):
     product_current = product_order_table.objects.filter(order_id_id=id)
    
     initial_data = {
-        'order_id_id': id
+        'order_id': id
     }
     form = new_order_for_products(request.POST, initial_data)
 
@@ -74,15 +74,12 @@ def select_products_for_order(request, id):
     }
     
     if request.method=='POST':
-        # Printing all accepted data to see error
-        print(request.POST.get('order_id')
-        print(request.POST.get('product_id')
-        print(request.POST.get('quantity')
-        print(request.POST.get('delivery_date')
-
-
-
         form = new_order_for_products(request.POST)
+        # Printing all accepted data to see error
+        print(request.POST.get('order_id'))
+        print(request.POST.get('product_id'))
+        print(request.POST.get('quantity'))
+        print(request.POST.get('delivery_date'))
         order_id_id = id
         prod_id = request.POST.get('product_id')
         quantity = request.POST.get('quantity')
