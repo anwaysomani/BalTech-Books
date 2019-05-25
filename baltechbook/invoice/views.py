@@ -75,7 +75,10 @@ def select_products_for_order(request, id):
     
     if request.method=='POST':
         # Printing all accepted data to see error
-
+        print(request.POST.get('order_id')
+        print(request.POST.get('product_id')
+        print(request.POST.get('quantity')
+        print(request.POST.get('delivery_date')
 
 
 
