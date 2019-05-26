@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from organizations.models import organization_table 
 from order.models import *
-from order.forms import new_order_for_products
+from order.forms import ProductsOrderForm
 from invoice.forms import order_init_details
 from stock.models import products_table
 
@@ -61,11 +61,10 @@ def orderInitDetails(request):
 # Selecting products
 def select_products_for_order(request, id):
     product_current = product_order_table.objects.filter(order_id_id=id)
-   
     initial_data = {
         'order_id': id
     }
-    form = new_order_for_products(request.POST, initial_data)
+    form = ProductsOrderForm(request.POST, initial_data)
 
     context = {
         'id': id,
@@ -74,23 +73,20 @@ def select_products_for_order(request, id):
     }
     
     if request.method=='POST':
-        form = new_order_for_products(request.POST)
-        # Printing all accepted data to see error
-        print(request.POST.get('order_id'))
-        print(request.POST.get('product_id'))
-        print(request.POST.get('quantity'))
-        print(request.POST.get('delivery_date'))
-        order_id_id = id
-        prod_id = request.POST.get('product_id')
-        quantity = request.POST.get('quantity')
-        val1 = products_table.objects.get(product_id=prod_id)
-        form.post_tax_amount = int(val1.post_tax_price) * quantity
+        form = ProductsOrderForm(request.POST)
+        new_data = form.save(commit=False)
+
         if form.is_valid():
-            form.save()
-            print("Step 3")
-            return redirect('product-order', id)
-        else:
-            print("Error")
+            print("Entered in the validation")
+            order_id = form.cleaned_data['order_id']
+            product_id = form.cleaned_data['product_id']
+            quantity = form.cleaned_data['quantity']
+            delivery_date = form.cleaned_data['delivery_date']
+             
+            new_data.save(product_id)
+
+    else:
+        form = ProductsOrderForm(request.POST, initial_data)
 
     return render(request, 'selectProducts.html', context)
 

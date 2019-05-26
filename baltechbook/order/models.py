@@ -20,7 +20,8 @@ class order_table(models.Model):
     status = models.CharField(max_length=11, null=True, default="", choices=ORDER_STATUS)
 
     def __unicode__(self):
-        return self.order_number
+        val = str(self.order_id)
+        return val
 
     class Meta:
         verbose_name = "Order"
@@ -34,9 +35,15 @@ class product_order_table(models.Model):
     order_id = models.ForeignKey(order_table)
     product_id = models.ForeignKey(products_table)
     quantity = models.IntegerField(choices=QUANTITY)
-    post_tax_amount = models.DecimalField(max_digits=7, decimal_places=2, null=True)
-    delivery_date = models.CharField(max_length=10)
+    post_tax_amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    delivery_date = models.CharField(max_length=10, default="", null=True, blank=True)
 
+    def save(self, prod_id, *args, **kwargs):
+        print("Value: ")
+        to_read = products_table.objects.get(product_id=prod_id)
+        value = to_read.post_tax_price
+        self.post_tax_amount = value * int(self.quantity)
+        super(product_order_table, self).save(*args, **kwargs)
 
 # Payment
 class payment_table(models.Model):
