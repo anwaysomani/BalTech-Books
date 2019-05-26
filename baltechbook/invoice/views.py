@@ -78,12 +78,12 @@ def select_products_for_order(request, id):
 
         if form.is_valid():
             print("Entered in the validation")
-            order_id = form.cleaned_data['order_id']
-            product_id = form.cleaned_data['product_id']
-            quantity = form.cleaned_data['quantity']
-            delivery_date = form.cleaned_data['delivery_date']
+            prod_id = form.cleaned_data['product_id']
+            print(prod_id)
+            quant = form.cleaned_data['quantity']
+            print(quant)
              
-            new_data.save(product_id)
+            new_data.save(prod_id, quant)
 
     else:
         form = ProductsOrderForm(request.POST, initial_data)

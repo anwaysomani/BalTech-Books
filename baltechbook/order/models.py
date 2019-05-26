@@ -38,11 +38,14 @@ class product_order_table(models.Model):
     post_tax_amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     delivery_date = models.CharField(max_length=10, default="", null=True, blank=True)
 
-    def save(self, prod_id, *args, **kwargs):
+    def save(self, prod_name, quant, *args, **kwargs):
         print("Value: ")
-        to_read = products_table.objects.get(product_id=prod_id)
-        value = to_read.post_tax_price
-        self.post_tax_amount = value * int(self.quantity)
+        to_read = products_table.objects.values_list('post_tax_price', flat=True).get(name=prod_name)
+        print(to_read)
+        value = to_read
+        print(value)
+        self.post_tax_amount = value * quant
+        print(self.post_tax_amount)
         super(product_order_table, self).save(*args, **kwargs)
 
 # Payment
