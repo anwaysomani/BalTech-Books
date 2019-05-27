@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from corec import views as corviews
+from corec.views import error_403, error_404, error_500
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,3 +30,7 @@ urlpatterns = [
     url('', include('organizations.urls')),
     url('', include('stock.urls')),
 ]
+
+handler403 = corviews.error_403 
+handler404 = corviews.error_404
+handler500 = corviews.error_500
