@@ -62,9 +62,9 @@ def orderInitDetails(request):
 def select_products_for_order(request, id):
     product_current = product_order_table.objects.filter(order_id_id=id)
     initial_data = {
-        'order_id': id
+        'order_id': id,
     }
-    form = ProductsOrderForm(request.POST, initial_data)
+    form = ProductsOrderForm(request.POST or None, initial_data)
 
     context = {
         'id': id,
@@ -72,21 +72,21 @@ def select_products_for_order(request, id):
         'products_list': product_current,
     }
     
-    if request.method=='POST':
+    if request.method=='POST' and form.is_valid():
         form = ProductsOrderForm(request.POST)
         new_data = form.save(commit=False)
 
-        if form.is_valid():
-            print("Entered in the validation")
-            prod_id = form.cleaned_data['product_id']
-            print(prod_id)
-            quant = form.cleaned_data['quantity']
-            print(quant)
+        prod_id = form.cleaned_data['product_id']
+        quant = form.cleaned_data['quantity']
+
+        #print("-----------------------------")
+        #print(new_data.order_id)
+        #new_data.order_id = id
              
-            new_data.save(prod_id, quant)
+        new_data.save(prod_id, quant)
 
     else:
-        form = ProductsOrderForm(request.POST, initial_data)
+        form = ProductsOrderForm(request.POST or None, initial_data)
 
     return render(request, 'selectProducts.html', context)
 

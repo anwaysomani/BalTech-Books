@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'reqs/headerBar.html' %}
+</head>
+
+<!-- 
+	Pattern:
+	- order_id & order_num
+	- Product to be purchased
+	- Customer information
+	- Checkout
+-->
+
+<body>
+	{% include 'reqs/navbar.html' %}
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>Customer Information</h2>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h2>Enter Customer Information</h2>
+			</div>
+		</div>
+
+		<!-- Selected products for the order -->
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h2>Cart Products</h2>
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">Product</th>
+				      <th scope="col">Quantity</th>
+				      <th scope="col">Delivery Date</th>
+				      <th scope="col">Action</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	{% for products in products_list %}
+				  		<tr>
+					      <th scope="row">{{ forloop.counter }}</th>
+					      <td>{{ products.product_id }}</td>
+					      <td>{{ products.quantity }}</td>
+					      <td>{{ products.delivery_date }}</td>
+					      <td><button class="btn btn-danger">Remove</button></td>
+					    </tr>
+				  	{% endfor %}
+				  </tbody>
+				</table>
+			</div>
+		</div>
+			
+	</div>
+
+{% include 'reqs/footerScripts.html' %}
+
+</body>
+</html>

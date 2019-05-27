@@ -7,7 +7,7 @@ class ProductsOrderForm(forms.ModelForm):
     class Meta:
         model = product_order_table
         fields = {'order_id', 'product_id', 'quantity', 'delivery_date'}
-    
+
         labels = {
             'product_id': 'Select Product'
         }

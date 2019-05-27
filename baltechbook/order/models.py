@@ -39,13 +39,9 @@ class product_order_table(models.Model):
     delivery_date = models.CharField(max_length=10, default="", null=True, blank=True)
 
     def save(self, prod_name, quant, *args, **kwargs):
-        print("Value: ")
         to_read = products_table.objects.values_list('post_tax_price', flat=True).get(name=prod_name)
-        print(to_read)
         value = to_read
-        print(value)
         self.post_tax_amount = value * quant
-        print(self.post_tax_amount)
         super(product_order_table, self).save(*args, **kwargs)
 
 # Payment
