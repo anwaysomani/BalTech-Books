@@ -8,6 +8,10 @@ class ProductsOrderForm(forms.ModelForm):
         model = product_order_table
         fields = {'order_id', 'product_id', 'quantity', 'delivery_date'}
 
+        widgets = {
+            'order_id': forms.Select(attrs={'readonly': True})
+        }
+
         labels = {
             'product_id': 'Select Product'
         }
@@ -17,5 +21,4 @@ class ProductsOrderForm(forms.ModelForm):
         self.fields['product_id'].queryset = products_table.objects.all()
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
-
 
