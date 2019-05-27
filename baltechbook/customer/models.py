@@ -10,7 +10,7 @@ class customer_table(models.Model):
     mobileNumber = models.CharField(max_length=10)
 
     def __unicode__(self):
-        return self.name
+        return self.name + " | " + self.email
 
     def __str__(self):
         return self.name

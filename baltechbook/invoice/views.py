@@ -1,11 +1,17 @@
 from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
+
+# Importing models
 from organizations.models import organization_table 
 from order.models import *
+from stock.models import products_table
+
+# Importing forms
 from order.forms import ProductsOrderForm
 from invoice.forms import order_init_details
-from stock.models import products_table
+from customer.forms import ExistingCustomerDetailForm, CustomerBasicDetailForm
+
 
 def invoice(request):
     return render(request, 'invoice.html', {})
@@ -75,11 +81,9 @@ def select_products_for_order(request, id):
     if request.method=='POST' and form.is_valid():
         form = ProductsOrderForm(request.POST)
         new_data = form.save(commit=False)
-
         prod_id = form.cleaned_data['product_id']
         quant = form.cleaned_data['quantity']
 
-        #print("-----------------------------")
         #print(new_data.order_id)
         #new_data.order_id = id
              
@@ -92,4 +96,14 @@ def select_products_for_order(request, id):
 
 # Customer Record
 def accept_customer_record(request, id):
-    return render(request, 'customer-record.html', {})
+    customer_records = customer_table.objects.all()
+    form_existing = ExistingCustomerDetailForm()
+    
+    context = {
+        'list': customer_records,
+        'form_existing': form_existing,
+    }
+
+    return render(request, 'customer-record.html', context)
+
+
