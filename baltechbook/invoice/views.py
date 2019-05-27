@@ -64,7 +64,7 @@ def select_products_for_order(request, id):
     initial_data = {
         'order_id': id,
     }
-    form = ProductsOrderForm(request.POST or None, initial_data)
+    form = ProductsOrderForm(request.POST or None, initial=initial_data)
 
     context = {
         'id': id,
@@ -86,7 +86,7 @@ def select_products_for_order(request, id):
         new_data.save(prod_id, quant)
 
     else:
-        form = ProductsOrderForm(request.POST or None, initial_data)
+        form = ProductsOrderForm(request.POST or None, initial=initial_data)
 
     return render(request, 'selectProducts.html', context)
 
