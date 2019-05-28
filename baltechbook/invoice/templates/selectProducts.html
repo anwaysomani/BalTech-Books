@@ -86,7 +86,24 @@
 			
 	</div>
 
-{% include 'reqs/footerScripts.html' %}
+	{% include 'reqs/footerScripts.html' %}
+
+	<!-- Fetching value from list to input area for form -->
+	<script>
+		$("#customer_list").on("click", "a", function(e){
+		    e.preventDefault();
+		    var $this = $(this).parent();
+		    $this.addClass("select").siblings().removeClass("select");
+		    $("#id_customer_info").val($this.data("value"));
+		});
+
+		$("form[name=existing_customer]").submit(function(e) {
+		    if ($(this).find("li.select").length == 0) {
+		        alert( "Please select a customer...or add a New One!" );
+		        e.preventDefault();
+		    }
+		});
+	</script>
 
 </body>
 </html>

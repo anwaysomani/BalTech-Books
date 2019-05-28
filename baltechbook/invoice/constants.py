@@ -16,8 +16,9 @@ GST_RATE = [
 
 # Invoice customer address
 ADDRESS_TYPE = [
-    (0, 'Billing'),
-    (1, 'Shipping'),
+    ('Billing', 'Billing'),
+    ('Shipping', 'Shipping'),
+    ('Temporary', 'Temporary'),
 ]
 
 # Refill Request

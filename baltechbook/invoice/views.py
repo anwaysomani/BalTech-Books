@@ -16,7 +16,7 @@ from stock.models import products_table
 # Importing forms
 from order.forms import ProductsOrderForm
 from invoice.forms import order_init_details
-from customer.forms import ExistingCustomerDetailForm, CustomerBasicDetailForm
+from customer.forms import ExistingCustomerDetailForm, CustomerBasicDetailForm, ExistingCustomerAddressForm, NewCustomerAddressForm
 
 # Exception Handling
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, EmptyResultSet, ObjectDoesNotExist, ValidationError
@@ -121,7 +121,7 @@ def accept_customer_record(request, id):
             cust_id = form_existing.cleaned_data['customer_info']
             update_record.customer_id = customer_table.objects.get(customer_id=cust_id)
             update_record.save()
-            return redirect('customer-address', id, update_record.customer_id)
+            return redirect('customer-address', id, cust_id)
 
         elif form_new.is_valid():
             c_name = form_new.cleaned_data['name']
@@ -135,8 +135,10 @@ def accept_customer_record(request, id):
 
                 try:
                     cusid = customer_table.objects.get(name=c_name, email=c_emailAddress, mobileNumber=c_number)
-                    update_record.customer_id  = cusid.customer_id
-                    return redirect('customer-address', id, update_record.customer_id)
+                    update_record.customer_id  = cusid
+                    cust_id = update_record.customer_id
+                    update_record.save()
+                    return redirect('customer-address', id, cust_id)
                 
                 except MultipleObjectsReturned:
                     return HttpResponseRedirect(self.request.path_info)
@@ -147,10 +149,12 @@ def accept_customer_record(request, id):
 
                 try:
                     cusid = customer_table.objects.get(name=c_name, email=c_emailAddress, mobileNumber=c_number)
-                    update_record.customer_id = cusid.customer_id
-                    return redirect('customer-address', id, update_record.customer_id)
+                    update_record.customer_id = cusid
+                    cust_id = cusid.customer_id
+                    update_record.save()
+                    return redirect('customer-address', id, cust_id)
 
-                except MultipleObjecctsReturned:
+                except MultipleObjectsReturned:
                     return HttpResponseRedirect(self.request.path_info)
                     messages.error(request, "Seems the customer already exists...Please select customer from below list!")
 
@@ -161,9 +165,28 @@ def accept_customer_record(request, id):
     return render(request, 'customer-record.html', context)
 
 # Customer address
-def accept_customer_address(request, id, customer_id):
-    print("Id" + id)
-    print("CustomerID" + customer_id)
+def accept_customer_address(request, id, cust_id):
+    address_list = customer_address_table.objects.filter(customer_id=cust_id)
 
-    return render(request, 'customer-address-record.html', {})
+    initial_data = {
+        'customer_id': cust_id
+    }
+
+    form_existing = ExistingCustomerAddressForm(request.POST)
+    form_new = NewCustomerAddressForm(request.POST, initial=initial_data)
+
+    context = {
+        'address_list': address_list,
+        'form_existing': form_existing,
+        'form_new': form_new,
+    }
+
+    if request.method=='POST':
+        if form_existing.is_valid():
+            print()
+        
+        if form_new.is_valid():
+            print()
+
+    return render(request, 'customer-address-record.html', context)
 
