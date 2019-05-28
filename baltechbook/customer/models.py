@@ -18,6 +18,7 @@ class customer_table(models.Model):
 # Customer Address
 class customer_address_table(models.Model):
     customer_address_id = models.IntegerField(primary_key=True)
+    customer_id = models.ForeignKey(customer_table, default=1)
     address_type = models.CharField(max_length=9, choices=ADDRESS_TYPE)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=30)
