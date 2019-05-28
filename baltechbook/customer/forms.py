@@ -3,13 +3,19 @@ from .models import customer_table, customer_address_table
 
 class CustomerBasicDetailForm(forms.ModelForm):
     class Meta:
-        fields = ['name', 'email', 'mobileNumber']
+        model = customer_table
+        fields = {'name', 'mobileNumber', 'email'}
 
         labels = {
             'name': "Customer's Name",
             'email': "Customer's Email Address",
             'mobileNumber': "Customer's Mobile Number"
         }
+
+    def __init__(self, *args, **kwargs):
+        super(CustomerBasicDetailForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
 
 
 class ExistingCustomerDetailForm(forms.Form):

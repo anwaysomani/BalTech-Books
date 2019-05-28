@@ -4,15 +4,16 @@ from organizations.models import organization_table
 from customer.models import customer_address_table, customer_table
 from accounts.models import employee_table
 from stock.models import products_table
+
+# Constants
 from invoice.constants import MODE_OF_PAYMENT, ORDER_STATUS, QUANTITY
 
 # Order 
 class order_table(models.Model):
     order_id = models.AutoField(primary_key=True)
-    customer_id = models.ForeignKey(customer_table, blank=True, null=True, default="")
+    customer_id = models.ForeignKey(customer_table, blank=True, null=True)
     organization_id = models.ForeignKey(organization_table, null=True, blank=True, default="")
-    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True, default="") # Billing address
-    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True, default="") # Shipping address
+    customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True, default="") # Billing/Shipping address
     employee_id = models.ForeignKey(employee_table, null=True, blank=True, default="")
     order_number = models.CharField(max_length=11)
     creation_date = models.DateField(auto_now=True, null=True)
