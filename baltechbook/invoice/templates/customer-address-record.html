@@ -21,9 +21,8 @@
 			<div class="panel-body">
 				<h2>Add A New Address</h2>
 				<hr>
-				<form method="POST" name="existing_customer" id="existing_customer_form">
+				<form method="POST" name="" id="">
 					{% csrf_token %}
-					<!-- {{ form_new }}<br> -->
 					{% for field in form_new %}
 						<div class="form-group col-md-6">
 							<label>{{ field.label_tag }}</label>
@@ -31,7 +30,7 @@
 						</div>
 					{% endfor %}
 					<button class="btn btn-default btn-md btn-success" value="submit">
-						Selected Address...Move to Payments <i class="fas fa-map-marked"></i>
+						Selected Address...Move to Payments <i class="fas fa-money-check-alt"></i>
 					</button>
 					<!-- <br><br>
 					<hr> -->
@@ -55,7 +54,7 @@
 						{{ field }}
 					{% endfor %}<br>
 					<button class="btn btn-default btn-md btn-success" value="submit">
-						Proceed to Payment <i class="fas fa-map-marked"></i>
+						Proceed to Payment <i class="fas fa-money-check-alt"></i>
 					</button><br><br>
 					<div class="list-group">
 						<ul>
@@ -63,7 +62,7 @@
 							<li>
 								<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 									<div class="d-flex w-100 justify-content-between">
-										<h5 class="mb-1">{{ object.city }}, {{ object.state }}, {{ obejct.country }}</h5>
+										<h5 class="mb-1">{{ object.city }}, {{ object.state }}, {{ object.country }}</h5>
 									</div>
 									<p class="mb-1">{{ object.address }} - {{ object.pincode }}</p>
 									<small>{{ object.address_type }}</small>

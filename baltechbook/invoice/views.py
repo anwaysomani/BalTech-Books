@@ -169,11 +169,11 @@ def accept_customer_address(request, id, cust_id):
     address_list = customer_address_table.objects.filter(customer_id=cust_id)
 
     initial_data = {
-        'customer_id': cust_id
+        'customer_id': cust_id,
     }
 
     form_existing = ExistingCustomerAddressForm(request.POST)
-    form_new = NewCustomerAddressForm(request.POST, initial=initial_data)
+    form_new = NewCustomerAddressForm(request.POST or None, initial=initial_data)
 
     context = {
         'address_list': address_list,
@@ -182,11 +182,26 @@ def accept_customer_address(request, id, cust_id):
     }
 
     if request.method=='POST':
+        print("In POST")
         if form_existing.is_valid():
-            print()
-        
+            print("Here Again!")
+       
+
         if form_new.is_valid():
-            print()
+            form_new = NewCustomerAddressForm(request.POST)
+            form_submit = form_new.save(commit=False)
+
+            #customer_id = form_submit.cleaned_data['customer_id']
+            form_submit.customer_id = customer_table.objects.get(customer_id=cust_id)
+            customer_address = form_new.cleaned_data['address']
+            form_submit.save()
+            customer_add = customer_address_table.objects.get(address=customer_address)
+            update_record = order_table.objects.get(order_id=id, customer_id=cust_id)
+            update_record.customer_address_id = customer_add
+            update_record.save()
+
+        else:
+            print(form_new.errors)
 
     return render(request, 'customer-address-record.html', context)
 

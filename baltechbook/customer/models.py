@@ -20,11 +20,13 @@ class customer_address_table(models.Model):
     customer_address_id = models.IntegerField(primary_key=True)
     customer_id = models.ForeignKey(customer_table, default=1)
     address_type = models.CharField(max_length=9, choices=ADDRESS_TYPE)
-    address = models.CharField(max_length=200)
+    address = models.CharField(max_length=200, unique=True)
     city = models.CharField(max_length=30)
     pincode = models.IntegerField()
-    state = models.CharField(max_length=35, choices=STATES)
-    country = models.CharField(max_length=50, choices=COUNTRIES)
+    state = models.CharField(max_length=35, choices=STATES, default='Maharashtra')
+    country = models.CharField(max_length=50, choices=COUNTRIES, default='India')
     phoneNumber = models.CharField(max_length=10)
     email = models.EmailField(null=True, blank=True)
 
+    def __str__(self):
+        return self.address

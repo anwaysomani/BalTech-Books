@@ -35,12 +35,21 @@ class NewCustomerAddressForm(forms.ModelForm):
     class Meta:
         model = customer_address_table
         fields = {'address', 'city', 'state', 'country', 'pincode', 'phoneNumber', 'email', 'address_type', 'customer_id'}
-        order = ('address', 'city', 'state', 'country', 'pincode', 'phoneNumber', 'email', 'address_type', 'customer_id')
+
+        widgets = {
+            'customer_id': forms.Select(attrs={'readonly': True})
+        }
 
     def __init__(self, *args, **kwargs):
         super(NewCustomerAddressForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+    def clean(self, *args, **kwargs):
+        print("In the cleaning method")
+        cleaned_data = super(NewCustomerAddressForm, self).clean()
+        addres = cleaned_data.get("address")
+        print(addres)
 
 
 class ExistingCustomerAddressForm(forms.Form):
