@@ -45,12 +45,6 @@ class NewCustomerAddressForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
-    def clean(self, *args, **kwargs):
-        print("In the cleaning method")
-        cleaned_data = super(NewCustomerAddressForm, self).clean()
-        addres = cleaned_data.get("address")
-        print(addres)
-
 
 class ExistingCustomerAddressForm(forms.Form):
     customer_address = forms.CharField()
