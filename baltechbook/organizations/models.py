@@ -18,6 +18,7 @@ class organization_table(models.Model):
     city = models.CharField(max_length=30)
     pincode = models.IntegerField(validators=[RegexValidator(r'^\d{1,10}$')], null=True)
     org_code = models.CharField(max_length=3)
+    weblink = models.URLField()
 
     def __str__(self):
         return self.organization_name
