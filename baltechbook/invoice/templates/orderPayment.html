@@ -19,16 +19,62 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
+				<h2>Customer Information</h2>
+				<hr>
+				{{ customer_info }}
+				{{ customer_address }}
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-body">
 				<h2>Payment</h2>
 				<hr>
-				<!-- <form method="POST" name="" id="">
+				<form method="POST" name="" id="">
+					{% for field in payment_form %}
+						<div class="form-group col-md-6">
+							<label>{{ field.label_tag }}</label>
+							{{ field }}
+						</div>
+					{% endfor %}
 					<button class="btn btn-default btn-md btn-success" value="submit">
 						Selected Address...Move to Payments <i class="fas fa-money-check-alt"></i>
 					</button>
 					<hr>
-				</form>	  -->
+				</form>
 			</div>
 		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h2>Products - Final</h2>
+				<table class="table table-hover">
+					<thead>
+				      <tr>
+				        <th>Product Name</th>
+				        <th>Actual Price</th>
+				        <th>CGST</th>
+				        <th>SGST</th>
+				        <th>IGST</th>
+				        <th>Post Tax Amount</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+						{% for object1 in all_products %}
+							<tr>
+								<td>{{ object1.product_id }}</td>
+								<td>{{ object1.product_id.actual_price }}</td>
+								<td>{{ object1.product_id.cgst_tax }}</td>
+								<td>{{ object1.product_id.sgst_tax }}</td>
+								<td>{{ object1.product_id.igst_tax }}</td>
+								<td>{{ object1.product_id.post_tax_price }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				<hr>
+			</div>
+		</div>
+		
 	</div>
 
 {% include 'reqs/footerScripts.html' %}

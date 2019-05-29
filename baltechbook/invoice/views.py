@@ -228,10 +228,25 @@ def accept_customer_address(request, id, cust_id):
 
 # Order payment
 def payment(request, id):
-    payment_form = PaymentForm(request.POST)
+    order_record = order_table.objects.get(order_id=id)
+    required_customer_id = order_record.customer_id.customer_id
+    required_address_id = order_record.customer_address_id.customer_address_id
+    all_products = product_order_table.objects.all().filter(order_id=id)
+    customer_info = customer_table.objects.get(customer_id=required_customer_id)
+    customer_address = customer_address_table.objects.get(customer_address_id=required_address_id)
+
+    initial_data = {
+        'order_id': id,
+    }
+
+    payment_form = PaymentForm(request.POST or None, initial=initial_data)
 
     context = {
         'payment_form': payment_form,
+        'order_record': order_record,
+        'all_products': all_products,
+        'customer_info': customer_info,
+        'customer_address': customer_address,
     }
 
     return render(request, 'orderPayment.html', context)
