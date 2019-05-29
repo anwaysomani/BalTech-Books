@@ -36,6 +36,10 @@ class PaymentForm(forms.ModelForm):
         model = payment_table
         fields = {'order_id', 'actual_amount', 'discount', 'payable_amount', 'mode_of_payment'}
 
+        widgets = {
+            'order_id': forms.Select(attrs={'readonly': True}),
+            'actual_amount': forms.TextInput(attrs={'readonly': True})
+        }
 
     def __init__(self, *args, **kwargs):
         super(PaymentForm, self).__init__(*args, **kwargs)
