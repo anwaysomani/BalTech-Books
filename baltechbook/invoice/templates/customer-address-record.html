@@ -47,7 +47,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h2>Existing Addresses of this Customer</h2>
-				<form method="POST">
+				<form method="POST" id="existing_customer_address" name="existing_customer_address">
 					{% csrf_token %}
 					{% for field in form_existing %}
 						<label>{{ field.label_tag }}</label>
@@ -57,9 +57,9 @@
 						Proceed to Payment <i class="fas fa-money-check-alt"></i>
 					</button><br><br>
 					<div class="list-group">
-						<ul>
+						<ul id="existing_addresses_list">
 							{% for object in address_list %}
-							<li>
+							<li data-value="{{ object.customer_address_id }}">
 								<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 									<div class="d-flex w-100 justify-content-between">
 										<h5 class="mb-1">{{ object.city }}, {{ object.state }}, {{ object.country }}</h5>
@@ -80,16 +80,16 @@
 
 	<!-- Fetching value from list to input area for form -->
 	<script>
-		$("#customer_list").on("click", "a", function(e){
+		$("#existing_addresses_list").on("click", "a", function(e){
 		    e.preventDefault();
 		    var $this = $(this).parent();
 		    $this.addClass("select").siblings().removeClass("select");
-		    $("#id_customer_info").val($this.data("value"));
+		    $("#id_customer_address").val($this.data("value"));
 		});
 
-		$("form[name=existing_customer]").submit(function(e) {
+		$("form[name=existing_customer_address]").submit(function(e) {
 		    if ($(this).find("li.select").length == 0) {
-		        alert( "Please select a customer...or add a New One!" );
+		        alert( "Please select an address...or add a New One!" );
 		        e.preventDefault();
 		    }
 		});

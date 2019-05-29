@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'invoice/add/selectProducts/(?P<id>\d+)/', views.select_products_for_order, name='product-order'),
     url(r'invoice/add/selectCustomer/(?P<id>\d+)/', views.accept_customer_record, name='customer-records'),
     url(r'invoice/add/customer/(?P<id>\d+)/address/(?P<cust_id>\d+)/$', views.accept_customer_address, name='customer-address'),
+    url(r'invoice/add/payment/(?P<id>\d+)/', views.payment, name='order-payment'),
 ]

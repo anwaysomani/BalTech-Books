@@ -29,3 +29,15 @@ class ProductsOrderForm(forms.ModelForm):
             elif field_name == 'quantity':
                 field.widget.attrs['placeholder'] = 'Enter a number'
 
+
+# Payment form
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = payment_table
+        fields = {'order_id', 'actual_amount', 'discount', 'payable_amount', 'mode_of_payment'}
+
+
+    def __init__(self, *args, **kwargs):
+        super(PaymentForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'

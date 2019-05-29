@@ -14,7 +14,7 @@ from order.models import *
 from stock.models import products_table
 
 # Importing forms
-from order.forms import ProductsOrderForm
+from order.forms import ProductsOrderForm, PaymentForm
 from invoice.forms import order_init_details
 from customer.forms import ExistingCustomerDetailForm, CustomerBasicDetailForm, ExistingCustomerAddressForm, NewCustomerAddressForm
 
@@ -184,7 +184,18 @@ def accept_customer_address(request, id, cust_id):
     if request.method=='POST':
         print("In POST")
         if form_existing.is_valid():
-            print("Here Again!")
+            # Fetch customer id from template
+            customerID = form_existing.cleaned_data['customer_address']
+            # Fetch customer address matching record
+            customer_record = customer_address_table.objects.get(customer_address_id=customerID)
+            # Fetch order object
+            update_record = order_table.objects.get(order_id=id, customer_id=cust_id)
+            # Assign customer_address instance to order table
+            update_record.customer_address_id = customer_record
+            # Save updated order_table instance
+            update_record.save()
+
+            return redirect('order-payment', id)
        
 
         if form_new.is_valid():
@@ -198,7 +209,7 @@ def accept_customer_address(request, id, cust_id):
             customer_address = form_new.cleaned_data['address']
             # Submit new form data(updated)
             form_submit.save()
-            # Fetech customer address object from db
+            # Fetch customer address object from db
             customer_add = customer_address_table.objects.get(address=customer_address)
             # Fetch order object from db
             update_record = order_table.objects.get(order_id=id, customer_id=cust_id)
@@ -207,8 +218,20 @@ def accept_customer_address(request, id, cust_id):
             # Save updated order_table instance
             update_record.save()
 
+            return redirect('order-payment', id)
+
         else:
             print(form_new.errors)
 
     return render(request, 'customer-address-record.html', context)
 
+
+# Order payment
+def payment(request, id):
+    payment_form = PaymentForm(request.POST)
+
+    context = {
+        'payment_form': payment_form,
+    }
+
+    return render(request, 'orderPayment.html', context)

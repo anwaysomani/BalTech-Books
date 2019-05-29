@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'reqs/headerBar.html' %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/customer-record.css' %}">
+</head>
+
+<body>
+	{% include 'reqs/navbar.html' %}
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>Checkout Review</h2>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h2>Payment</h2>
+				<hr>
+				<!-- <form method="POST" name="" id="">
+					<button class="btn btn-default btn-md btn-success" value="submit">
+						Selected Address...Move to Payments <i class="fas fa-money-check-alt"></i>
+					</button>
+					<hr>
+				</form>	  -->
+			</div>
+		</div>
+	</div>
+
+{% include 'reqs/footerScripts.html' %}
+
+	<!-- Fetching value from list to input area for form -->
+	<script>
+		$("#existing_addresses_list").on("click", "a", function(e){
+		    e.preventDefault();
+		    var $this = $(this).parent();
+		    $this.addClass("select").siblings().removeClass("select");
+		    $("#id_customer_address").val($this.data("value"));
+		});
+
+		$("form[name=existing_customer_address]").submit(function(e) {
+		    if ($(this).find("li.select").length == 0) {
+		        alert( "Please select an address...or add a New One!" );
+		        e.preventDefault();
+		    }
+		});
+	</script>
+
+</body>
+</html>

@@ -90,9 +90,9 @@ TERRITORIES = [
 
 # Payment Method
 MODE_OF_PAYMENT = [
-    (1, 'Cash'),
-    (2, 'Card'),
-    (3, 'E-Waller'),
+    ('Cash', 'Cash'),
+    ('Card', 'Card'),
+    ('E-Wallet', 'E-Waller'),
 ]
 
 # Webpage categories for reference to complain
