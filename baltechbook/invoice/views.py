@@ -50,10 +50,16 @@ def orderInitDetails(request):
     # Printing order_number via domain
     order_code = orgCode + str(orgId) + str(employeeId) + "." + str(orderId)
 
+    # Fetch organization id
+    field_organization_id = 'organization_id'
+    organization_ID = getattr(obj, field_organization_id)
+
     # Declaring initial data for order form
     initial_data = {
         'order_id': orderId,
-        'order_number': order_code
+        'order_number': order_code,
+        'organization_id': organization_ID,
+        'employee_id': employeeId,
     }
 
     # Declaring form for init order details
@@ -235,8 +241,15 @@ def payment(request, id):
     customer_info = customer_table.objects.get(customer_id=required_customer_id)
     customer_address = customer_address_table.objects.get(customer_address_id=required_address_id)
 
+    val = 0
+    for prod in all_products:
+        val = val + prod.post_tax_amount
+
     initial_data = {
         'order_id': id,
+        'actual_amount': val,
+        'payable_amount': val,
+        'discount': 0,
     }
 
     payment_form = PaymentForm(request.POST or None, initial=initial_data)
@@ -247,6 +260,35 @@ def payment(request, id):
         'all_products': all_products,
         'customer_info': customer_info,
         'customer_address': customer_address,
+        'val': val,
     }
 
+    if request.method=='POST':
+        if payment_form.is_valid():
+            payment_form.save()
+            return redirect('final-invoice', id)
+        else:
+            print(payment_form.errors)
+
     return render(request, 'orderPayment.html', context)
+
+def generate_invoice(request, id):
+    order_record = order_table.objects.get(order_id=id)
+    required_customer_id = order_record.customer_id.customer_id
+    required_address_id = order_record.customer_address_id.customer_address_id
+    all_products = product_order_table.objects.all().filter(order_id=id)
+    customer_info = customer_table.objects.get(customer_id=required_customer_id)
+    customer_address = customer_address_table.objects.get(customer_address_id=required_address_id)
+    payment_record = payment_table.objects.get(order_id=id)
+
+    context = { 
+        'order_record': order_record,
+        'all_products': all_products,
+        'customer_info': customer_info,
+        'customer_address': customer_address,
+        'payment_record': payment_record,
+    }  
+
+    return render(request, 'finalInvoice.html', context)
+
+

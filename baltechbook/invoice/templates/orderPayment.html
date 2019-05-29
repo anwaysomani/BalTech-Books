@@ -11,6 +11,17 @@
 	{% include 'reqs/navbar.html' %}
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<!-- Just an image -->
+		<nav class="navbar navbar-light bg-light">
+		  <a class="navbar-brand" href="#">
+		    <i class="fas fa-file-invoice"></i>
+		  </a>
+		  <a class="navbar-brand" href="#" readonly>->
+		    <i class="fas fa-file-invoice"></i>
+		  </a> 	
+		</nav>
+
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>Checkout Review</h2>
@@ -19,18 +30,10 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<h2>Customer Information</h2>
-				<hr>
-				{{ customer_info }}
-				{{ customer_address }}
-			</div>
-		</div>
-
-		<div class="panel panel-default">
-			<div class="panel-body">
 				<h2>Payment</h2>
 				<hr>
-				<form method="POST" name="" id="">
+				<form method="POST">
+					{% csrf_token %}
 					{% for field in payment_form %}
 						<div class="form-group col-md-6">
 							<label>{{ field.label_tag }}</label>
@@ -38,7 +41,7 @@
 						</div>
 					{% endfor %}
 					<button class="btn btn-default btn-md btn-success" value="submit">
-						Selected Address...Move to Payments <i class="fas fa-money-check-alt"></i>
+						Generate Invoice <i class="fas fa-file-invoice"></i>
 					</button>
 					<hr>
 				</form>
@@ -47,7 +50,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<h2>Products - Final</h2>
+				<h2>Products</h2>
 				<table class="table table-hover">
 					<thead>
 				      <tr>
@@ -56,6 +59,7 @@
 				        <th>CGST</th>
 				        <th>SGST</th>
 				        <th>IGST</th>
+				        <th>Quantity</th>
 				        <th>Post Tax Amount</th>
 				      </tr>
 				    </thead>
@@ -67,14 +71,65 @@
 								<td>{{ object1.product_id.cgst_tax }}</td>
 								<td>{{ object1.product_id.sgst_tax }}</td>
 								<td>{{ object1.product_id.igst_tax }}</td>
-								<td>{{ object1.product_id.post_tax_price }}</td>
+								<td>{{ object1.quantity }}</td>
+								<td>{{ object1.post_tax_amount }}</td>
 							</tr>
 						{% endfor %}
 					</tbody>
+				</table>
 				<hr>
 			</div>
 		</div>
-		
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h2>Customer Information</h2>
+				<hr>
+				<!-- {{ customer_info }}
+				{{ customer_address }} -->
+
+				
+				<table class="table table-bordered">
+				    <tr>
+				      <th>Name</th>
+				      <td>{{ customer_info.name }}</td>
+				    </tr>
+				    <tr>
+				      <th>Email</th>
+				      <td>{{ customer_info.email }}</td>
+				    </tr>
+				    <tr>
+				      <th>Mobile Number</th>
+				      <td>{{ customer_info.mobileNumber }}</td>
+				    </tr>
+				    <tr>
+				      <th>Billing/Shipping Address</th>
+				      <td>{{ customer_address.address }}, {{ customer_address.city }} - {{ customer_address.pincode }}</td>
+				    </tr>
+				    <tr>
+				      <th>State</th>
+				      <td>{{ customer_address.state }}</td>
+				    </tr>
+				    <tr>
+				      <th>Country</th>
+				      <td>{{ customer_address.country }}</td>
+				    </tr>
+				    <tr>
+				      <th>Alternate Email</th>
+				      <td>{{ customer_address.email }}</td>
+				    </tr>
+				    <tr>
+				      <th>Alternate Mobile Number</th>
+				      <td>{{ customer_address.phoneNumber }}</td>
+				    </tr>
+				    <tr>
+				      <th>Date of issuing</th>
+				      <td>{{ order_record.creation_date }}, {{order_record.creation_time }}</td>
+				    </tr>
+				</table>
+			</div>
+		</div>
+
 	</div>
 
 {% include 'reqs/footerScripts.html' %}
@@ -93,6 +148,22 @@
 		        alert( "Please select an address...or add a New One!" );
 		        e.preventDefault();
 		    }
+		});
+	</script>
+
+	<!-- JQeury func to automatically change final amount field value, based on discount selection -->
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+		    function updatePrice()
+		    {
+		        var price = parseFloat($("#id_discount").val());
+		        var actual_amount = parseFloat($("#id_actual_amount").val());
+		        var total = actual_amount - price;
+		        var total = total.toFixed(2);
+		        $("#id_payable_amount").val(total);
+		    }
+		    $(document).on("change, keyup", "#id_discount", updatePrice);
 		});
 	</script>
 

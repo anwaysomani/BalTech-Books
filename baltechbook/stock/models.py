@@ -9,14 +9,39 @@ class products_table(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(null=True, blank=True)
     actual_price = models.DecimalField(max_digits=7, decimal_places=2)
-    cgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE)
-    sgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE)
-    igst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE)
-    post_tax_price = models.DecimalField(max_digits=7, decimal_places=2)
+    cgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE, default=0)
+    sgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE, default=0)
+    igst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE, default=0)
+    post_tax_price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     launch_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        # Assign check values to variable
+        cgst = 0
+        sgst = 0
+        igst = 0
+        
+        # Fetching proportion value
+        if self.cgst_tax > 0:
+            cgst = self.cgst_tax/100
+        if self.sgst_tax > 0:
+            sgst = self.sgst_tax/100
+        if self.igst_tax > 0:
+            igst = self.igst_tax/100
+
+        # Calculating value for gst's
+        cgst_value = self.actual_price * cgst
+        sgst_value = self.actual_price * sgst
+        igst_value = self.actual_price * igst
+
+        # Assigning value for post_tax_amount
+        self.post_tax_price = self.actual_price + cgst_value + sgst_value + igst_value
+
+        # Calling save method
+        super(products_table, self).save(*args, **kwargs)
 
 
 # Stock Records

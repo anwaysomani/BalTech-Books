@@ -38,7 +38,8 @@ class PaymentForm(forms.ModelForm):
 
         widgets = {
             'order_id': forms.Select(attrs={'readonly': True}),
-            'actual_amount': forms.TextInput(attrs={'readonly': True})
+            'actual_amount': forms.TextInput(attrs={'readonly': True}),
+            'payable_amount': forms.TextInput(attrs={'readonly': True})
         }
 
     def __init__(self, *args, **kwargs):

@@ -19,6 +19,9 @@ class organization_table(models.Model):
     pincode = models.IntegerField(validators=[RegexValidator(r'^\d{1,10}$')], null=True)
     org_code = models.CharField(max_length=3)
 
+    def __str__(self):
+        return self.organization_name
+
     def __unicode__(self):
         return self.organization_name
 

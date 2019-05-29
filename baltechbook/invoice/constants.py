@@ -7,11 +7,11 @@ GST = [
 
 # GST Rates 
 GST_RATE = [
-    (1, '0%'),
-    (2, '5%'),
-    (3, '12%'),
-    (4, '18%'),
-    (5, '28%'),
+    (0, '0%'),
+    (5, '5%'),
+    (12, '12%'),
+    (18, '18%'),
+    (28, '28%'),
 ]
 
 # Invoice customer address
@@ -92,7 +92,7 @@ TERRITORIES = [
 MODE_OF_PAYMENT = [
     ('Cash', 'Cash'),
     ('Card', 'Card'),
-    ('E-Wallet', 'E-Waller'),
+    ('E-Wallet', 'E-Wallet'),
 ]
 
 # Webpage categories for reference to complain
@@ -103,14 +103,5 @@ WEBPAGE_REF = [
     ('Manage Orders', 'Manage Orders'),
     ('Inventory', 'Inventory'),
     ('Team', 'Team'),
-]
-
-QUANTITY = [
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4), 
-    (5, 5),
-    (6, 6),
 ]
 

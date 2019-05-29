@@ -6,7 +6,7 @@ from accounts.models import employee_table
 from stock.models import products_table
 
 # Constants
-from invoice.constants import MODE_OF_PAYMENT, ORDER_STATUS, QUANTITY
+from invoice.constants import MODE_OF_PAYMENT, ORDER_STATUS
 
 # Order 
 class order_table(models.Model):
@@ -16,7 +16,7 @@ class order_table(models.Model):
     customer_address_id = models.ForeignKey(customer_address_table, null=True, blank=True, default="") # Billing/Shipping address
     employee_id = models.ForeignKey(employee_table, null=True, blank=True, default="")
     order_number = models.CharField(max_length=11)
-    creation_date = models.DateField(auto_now=True, null=True)
+    creation_date = models.DateField(auto_now=True)
     creation_time = models.TimeField(auto_now=True, null=True)
     status = models.CharField(max_length=11, null=True, default="", choices=ORDER_STATUS)
 
@@ -37,7 +37,7 @@ class product_order_table(models.Model):
     product_id = models.ForeignKey(products_table)
     quantity = models.IntegerField()
     post_tax_amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
-    delivery_date = models.CharField(max_length=10, default="", null=True, blank=True)
+    delivery_date = models.DateField(default="", null=True, blank=True)
 
     def save(self, prod_name, quant, *args, **kwargs):
         to_read = products_table.objects.values_list('post_tax_price', flat=True).get(name=prod_name)
@@ -51,8 +51,8 @@ class payment_table(models.Model):
     order_id = models.ForeignKey(order_table)
     actual_amount = models.DecimalField(max_digits=7, decimal_places=2)
     discount = models.DecimalField(max_digits=3, decimal_places=2)
-    payable_amount = models.DecimalField(max_digits=5, decimal_places=2)
-    mode_of_payment = models.CharField(max_length=7, choices=MODE_OF_PAYMENT)
+    payable_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    mode_of_payment = models.CharField(max_length=7, choices=MODE_OF_PAYMENT, default="Cash")
 
 
 # Order Delivery Records
