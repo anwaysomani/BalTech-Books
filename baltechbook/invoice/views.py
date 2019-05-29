@@ -188,16 +188,23 @@ def accept_customer_address(request, id, cust_id):
        
 
         if form_new.is_valid():
+            # Create save instance
             form_new = NewCustomerAddressForm(request.POST)
+            # Fake Submission record
             form_submit = form_new.save(commit=False)
-
-            #customer_id = form_submit.cleaned_data['customer_id']
+            # Update customer_id to fake submission
             form_submit.customer_id = customer_table.objects.get(customer_id=cust_id)
+            # Retrieve address from template form data for search render
             customer_address = form_new.cleaned_data['address']
+            # Submit new form data(updated)
             form_submit.save()
+            # Fetech customer address object from db
             customer_add = customer_address_table.objects.get(address=customer_address)
+            # Fetch order object from db
             update_record = order_table.objects.get(order_id=id, customer_id=cust_id)
+            # Assign customer_address_id to order table
             update_record.customer_address_id = customer_add
+            # Save updated order_table instance
             update_record.save()
 
         else:
