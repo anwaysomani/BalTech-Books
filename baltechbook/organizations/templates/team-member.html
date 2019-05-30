@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'reqs/headerBar.html' %}
+</head>
+<body>
+	{% include 'reqs/navbar.html' %}
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<i class="fas fa-users-cog"></i>
+				</a></li>
+				<li class="active"><a href="{% url 'team' id %}">Team</a></li>
+				<li class="active">{{ member.first_name }} {{ member.last_name }}</li>
+			</ol>
+		</div>
+
+		<div class="panel panel-container">
+			<h2 class="text-center">{{ member.first_name }} {{ member.last_name }}</h2>
+			<hr>
+
+			<div class="col-md-8">
+				<div class="panel panel-default ">
+					<div class="panel panel-default articles">
+						<div class="panel-heading">
+							Personal Info
+						</div>
+						<div class="panel-body articles-container">
+							<div class="col-xs-10 col-md-10">
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">Mobile Number</label>
+									<div class="col-md-8">
+										{% if member.mobile_number == None %}
+											-
+										{% else %}
+											{{ member.mobile_number }}
+										{% endif %}
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-10 col-md-10">
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">E-Mail</label>
+									<div class="col-md-8">
+										{{ member.email }}
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-10 col-md-10">
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">Address</label>
+									<div class="col-md-8">
+										{{ member.address }}
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-10 col-md-10">
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">City</label>
+									<div class="col-md-8">
+										{{ member.city }}, {{ member.state }} - {{ member.pincode }}
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-10 col-md-10">
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">Designation</label>
+									<div class="col-md-8">
+										{{ member.designation }}
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-10 col-md-10">
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">Employee Type</label>
+									<div class="col-md-8">
+										{{ member.employee_type }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+						Target Acheived
+					</div>
+					<div class="panel panel-default articles">
+						<div class="panel-body easypiechart-panel">
+						<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span></div>
+					</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-12">
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+							Invoices Issued
+						</div>
+					<div class="panel panel-default articles">
+						<div class="panel panel-info">
+							<div class="panel-body">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+
+		</div>
+	</div>
+
+
+	
+	{% include 'reqs/footerScripts.html' %}
+		
+</body>
+</html>
