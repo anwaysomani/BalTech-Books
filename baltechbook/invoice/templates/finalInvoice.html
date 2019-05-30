@@ -177,8 +177,8 @@
 					<p>{{ order_record.organization_id.organization_name }}</p><br>
 					<p>Corporate Office - {{ order_record.organization_id.addressLine1 }}, {{ order_record.organization_id.addressLine2 }},
 					{{ order_record.organization_id.city }} - {{ order_record.organization_id.pincode }}</p><br>
-					<p><i class="far fa-envelope"></i> {{ order_record.organization_id.salesEmail }}</p>
-					<p><i class="fas fa-globe"></i> {{ order_record.organization_id.weblink }}</p>
+					<p style="margin-bottom: 5px;"><i class="far fa-envelope"></i> {{ order_record.organization_id.salesEmail }}</p>
+					<p style="margin-bottom: 5px;"><i class="fas fa-globe"></i> {{ order_record.organization_id.weblink }}</p>
 					<p><i class="fas fa-headset"></i> +91 {{ order_record.organization_id.mobileNumber }}</p>
 				</div>
 			</div>
@@ -242,6 +242,10 @@
 				<tr>
 					<th><span>Mode of Payment</span></th>
 					<td><span>{{ payment_record.mode_of_payment }}</span></td>
+				</tr>
+				<tr>
+					<th><span>Sales Person</span></th>
+					<td><span>{{ order_record.employee_id.first_name }} {{ order_record.employee_id.last_name }}</span></td>
 				</tr>
 			</table>
 		</article>
