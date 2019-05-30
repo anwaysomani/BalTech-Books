@@ -9,7 +9,7 @@ class ProductsOrderForm(forms.ModelForm):
         fields = {'order_id', 'product_id', 'quantity', 'delivery_date'}
 
         widgets = {
-            'order_id': forms.Select(attrs={'readonly': True})
+            'order_id': forms.TextInput(attrs={'readonly': True})
         }
 
         labels = {
