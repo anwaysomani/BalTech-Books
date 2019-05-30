@@ -25,7 +25,7 @@ class customer_address_table(models.Model):
     pincode = models.IntegerField()
     state = models.CharField(max_length=35, choices=STATES, default='Maharashtra')
     country = models.CharField(max_length=50, choices=COUNTRIES, default='India')
-    phoneNumber = models.CharField(max_length=10)
+    phoneNumber = models.CharField(max_length=10, blank=True)
     email = models.EmailField(null=True, blank=True)
 
     def __str__(self):

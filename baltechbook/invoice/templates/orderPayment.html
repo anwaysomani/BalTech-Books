@@ -34,16 +34,38 @@
 				<hr>
 				<form method="POST">
 					{% csrf_token %}
-					{% for field in payment_form %}
-						<div class="form-group col-md-6">
-							<label>{{ field.label_tag }}</label>
-							{{ field }}
-						</div>
-						{{ field.errors }}
-					{% endfor %}
-					<button class="btn btn-default btn-md btn-success" value="submit">
-						Generate Invoice <i class="fas fa-file-invoice"></i>
-					</button>
+					<div class="form-group col-md-6">
+						<label>{{ payment_form.order_id.label_tag }}</label>
+						{{ payment_form.order_id }}
+						{{ payment_form.order_id.errors }}
+					</div>
+					<legend>Actual Transaction</legend>
+					<div class="form-group col-md-6">
+						<label>{{ payment_form.actual_amount.label_tag }}</label>
+						{{ payment_form.actual_amount }}
+						{{ payment_form.actual_amount.errors }}
+					</div>
+					<div class="form-group col-md-6">
+						<label>{{ payment_form.discount.label_tag }}</label>
+						{{ payment_form.discount }}
+						{{ payment_form.discount.errors }}
+					</div>
+					<legend>Final Transaction</legend>
+					<div class="form-group col-md-6">
+						<label>{{ payment_form.payable_amount.label_tag }}</label>
+						{{ payment_form.payable_amount }}
+						{{ payment_form.payable_amount.errors }}
+					</div>
+					<div class="form-group col-md-6">
+						<label>{{ payment_form.mode_of_payment.label_tag }}</label>
+						{{ payment_form.mode_of_payment }}
+						{{ payment_form.mode_of_payment.errors }}
+					</div>
+					<div class="form-group col-md-12">
+						<button class="btn btn-default btn-md btn-success" value="submit">
+							Generate Invoice <i class="fas fa-file-invoice"></i>
+						</button>
+					</div>
 					<hr>
 				</form>
 			</div>
@@ -116,12 +138,20 @@
 				      <td>{{ customer_address.country }}</td>
 				    </tr>
 				    <tr>
-				      <th>Alternate Email</th>
-				      <td>{{ customer_address.email }}</td>
+				      	<th>Alternate Email</th>
+				      	{% if customer_address.email == None %}
+				      		<td> - </td>
+				      	{% else %}
+			      			<td>{{ customer_address.email }}</td>
+			      		{% endif %}
 				    </tr>
 				    <tr>
-				      <th>Alternate Mobile Number</th>
-				      <td>{{ customer_address.phoneNumber }}</td>
+				    	<th>Alternate Mobile Number</th>
+				      	{% if customer_address.phoneNumber == '' %}
+				      		<td> - </td>
+				      	{% else %}
+			      			<td>{{ customer_address.phoneNumber }}</td>
+			      		{% endif %}
 				    </tr>
 				    <tr>
 				      <th>Date of issuing</th>
