@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'reqs/headerBar.html' %}
+</head>
+<body>
+	{% include 'reqs/navbar.html' %}
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<i class="fas fa-warehouse"></i>
+				</a></li>
+				<li class="active">Inventory</li>
+			</ol>
+		</div>
+
+		<div class="row">
+			<legend class="text-center">GREENZEE PRODUCTS</legend>
+			<a href="">
+				<button type="button" class="btn btn-md btn-primary" style="width: 100%;">
+					Create A New Product
+				</button>
+			</a>
+			<br><br>
+			{% for product in product_list %}
+				<a href="">
+					<div class="col-md-6">
+						<div class="panel panel-warning">
+							<div class="panel-heading text-center">
+								{{ product.name }}
+							</div>
+							<div class="panel-body">
+								<p>{{ product.description }}</p>
+								<hr>
+								<div class="form-group">
+									<label class="col-md-4 control-label" for="name">Actual Amount</label>
+									<div class="col-md-8">
+										{{ product.actual_price }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+
+	<!-- <div class="row progress-labels">
+		<div class="col-sm-6">New Orders</div>
+		<div class="col-sm-6" style="text-align: right;">80%</div>
+	</div>
+	<div class="progress">
+		<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<div class="row progress-labels">
+		<div class="col-sm-6">New Orders</div>
+		<div class="col-sm-6" style="text-align: right;">80%</div>
+	</div>
+	<div class="progress">
+		<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+	</div> -->
+	
+	{% include 'reqs/footerScripts.html' %}
+		
+</body>
+</html>
