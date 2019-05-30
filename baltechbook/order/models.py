@@ -24,6 +24,10 @@ class order_table(models.Model):
         val = str(self.order_id)
         return val
 
+    def __str__(self):
+        val = str(self.order_id)
+        return val
+
     class Meta:
         verbose_name = "Order"
         verbose_name_plural = "Orders"
@@ -44,6 +48,13 @@ class product_order_table(models.Model):
         value = to_read
         self.post_tax_amount = value * quant
         super(product_order_table, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.product_order_id)
+
+    def __unicode__(self):
+            return unicode(str(self.product_order_id))
+    
 
 # Payment
 class payment_table(models.Model):

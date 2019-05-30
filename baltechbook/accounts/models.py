@@ -42,6 +42,9 @@ class employee_privilege_table(models.Model):
     max_allowed_members = models.IntegerField()
     current_members = models.IntegerField
 
+    def __str__(self):
+            return self.title
+
     class Meta:
         verbose_name = "Employee's Privilege"
         verbose_name_plural = "Employee's Privileges"
