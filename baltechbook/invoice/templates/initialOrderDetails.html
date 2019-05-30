@@ -28,16 +28,30 @@
 			<div class="panel-body">
 				<form class="form-horizontal" action="" method="POST">
 					{% csrf_token %}
-					{% for field in form.visible_fields %}
-					<!-- <fieldset>-->
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="name">{{ field.label_tag }}</label>
-							<div class="col-md-9">
-								{{ field }}
-							</div>
-							{{ field.errors }}
+					<legend>Order Details</legend>
+					<div class="form-group">
+						<label class="col-md-3 control-label" for="name">{{ form.order_number.label_tag }}</label>
+						<div class="col-md-9">
+							{{ form.order_number }}
 						</div>
-					{% endfor %}
+						{{ form.order_number.errors }}
+					</div>
+					<legend>Organization Info</legend>
+					<div class="form-group">
+						<label class="col-md-3 control-label" for="name">{{ form.organization_id.label_tag }}</label>
+						<div class="col-md-9">
+							{{ form.organization_id }}
+						</div>
+						{{ form.organization_id.errors }}
+					</div>
+					<legend>Employee Info</legend>
+					<div class="form-group">
+						<label class="col-md-3 control-label" for="name">{{ form.employee_id.label_tag }}</label>
+						<div class="col-md-9">
+							{{ form.employee_id }}
+						</div>
+						{{ form.employee_id.errors }}
+					</div>
 					<div class="form-group">
 						<div class="col-md-12">
 							<button type="submit" class="btn btn-default btn-md pull-right btn-primary">
@@ -48,11 +62,6 @@
 				</form>
 			</div>
 		</div>
-		<!-- <div class="panel panel-default">
-			<div class="panel-body">
-			</div>
-		</div> -->
-			
 	</div>
 
 {% include 'reqs/footerScripts.html' %}
