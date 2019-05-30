@@ -30,13 +30,11 @@
 				<h2>A New Customer!</h2>
 				<form method="POST">
 					{% csrf_token %}
-					
-						{% if messages %}
-							{% for message  in messages %}
-								<p style="color: red;">{{ message }}</p>
-							{% endfor %}
-						{% endif %}
-					
+					{% if messages %}
+						{% for message  in messages %}
+							<p style="color: red;">{{ message }}</p>
+						{% endfor %}
+					{% endif %}
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>{{ form_new.name.label_tag }}</label>
@@ -53,8 +51,6 @@
 							{{ form_new.email }}
 							{{ form_new.email.errors }}
 						</div>
-						
-
 					</div>
 					<div class="col-md-12">
 						<button type="submit" class="btn btn-default btn-md btn-success pull-right" name="add_to_cart">
