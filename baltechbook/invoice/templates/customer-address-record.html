@@ -23,19 +23,60 @@
 				<hr>
 				<form method="POST" name="" id="">
 					{% csrf_token %}
-					{% for field in form_new %}
-						<div class="form-group col-md-6">
-							<label>{{ field.label_tag }}</label>
-							{{ field }}
-						</div>
-						{{ field.errors }}
-					{% endfor %}
-					<button class="btn btn-default btn-md btn-success" value="submit">
-						Selected Address...Move to Payments <i class="fas fa-money-check-alt"></i>
-					</button>
-					<!-- <br><br>
-					<hr> -->
-					<!-- <input type="text" id="is_customer" onkeyup="searchFunc()" placeholder="Start typing characters" title="Type in a name"> -->
+					<legend>Customer Address</legend>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.address.label_tag }}</label>
+						{{ form_new.address }}
+						{{ form_new.address.errors }}
+					</div>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.city.label_tag }}</label>
+						{{ form_new.city }}
+						{{ form_new.city.errors }}
+					</div>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.state.label_tag }}</label>
+						{{ form_new.state }}
+						{{ form_new.state.errors }}
+					</div>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.country.label_tag }}</label>
+						{{ form_new.country }}
+						{{ form_new.country.errors }}
+					</div>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.pincode.label_tag }}</label>
+						{{ form_new.pincode }}
+						{{ form_new.pincode.errors }}
+					</div>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.address_type.label_tag }}</label>
+						{{ form_new.address_type }}
+						{{ form_new.address_type.errors }}
+					</div>
+					<div class="form-group col-md-6"></div>
+					<legend>Alternate Contact Information</legend>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.phoneNumber.label_tag }}</label>
+						{{ form_new.phoneNumber }}
+						{{ form_new.phoneNumber.errors }}
+					</div>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.email.label_tag }}</label>
+						{{ form_new.email }}
+						{{ form_new.email.errors }}
+					</div>
+					<legend>Customer Information</legend>
+					<div class="form-group col-md-6">
+						<label>{{ form_new.customer_id.label_tag }}</label>
+						{{ form_new.customer_id }}
+						{{ form_new.customer_id.errors }}
+					</div>
+					<div class="form-group col-md-12">
+						<button class="btn btn-default btn-md btn-success" value="submit">
+							Selected Address...Move to Payments <i class="fas fa-money-check-alt"></i>
+						</button>
+					</div>
 					<hr>
 				</form>	 
 			</div>

@@ -37,7 +37,7 @@ class NewCustomerAddressForm(forms.ModelForm):
         fields = {'address', 'city', 'state', 'country', 'pincode', 'phoneNumber', 'email', 'address_type', 'customer_id'}
 
         widgets = {
-            'customer_id': forms.Select(attrs={'readonly': True})
+            'customer_id': forms.TextInput(attrs={'readonly': True})
         }
 
         labels = {
