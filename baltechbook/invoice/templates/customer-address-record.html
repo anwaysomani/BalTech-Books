@@ -28,6 +28,7 @@
 							<label>{{ field.label_tag }}</label>
 							{{ field }}
 						</div>
+						{{ field.errors }}
 					{% endfor %}
 					<button class="btn btn-default btn-md btn-success" value="submit">
 						Selected Address...Move to Payments <i class="fas fa-money-check-alt"></i>
@@ -52,6 +53,7 @@
 					{% for field in form_existing %}
 						<label>{{ field.label_tag }}</label>
 						{{ field }}
+						{{ field.errors }}
 					{% endfor %}<br>
 					<button class="btn btn-default btn-md btn-success" value="submit">
 						Proceed to Payment <i class="fas fa-money-check-alt"></i>

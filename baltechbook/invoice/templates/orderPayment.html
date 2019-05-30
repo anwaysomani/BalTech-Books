@@ -39,6 +39,7 @@
 							<label>{{ field.label_tag }}</label>
 							{{ field }}
 						</div>
+						{{ field.errors }}
 					{% endfor %}
 					<button class="btn btn-default btn-md btn-success" value="submit">
 						Generate Invoice <i class="fas fa-file-invoice"></i>
