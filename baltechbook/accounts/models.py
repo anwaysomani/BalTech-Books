@@ -59,7 +59,7 @@ class employee_table(AbstractBaseUser):
     admin = models.BooleanField(default=False) # a superuser
 
     # Custom defined fields
-    employee_id = models.CharField(max_length=8, null=True, blank=True)
+    employee_id = models.CharField(max_length=8, primary_key=True)
     mobile_number = models.CharField(max_length=10, null=True, blank=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
@@ -82,14 +82,17 @@ class employee_table(AbstractBaseUser):
 
     def get_full_name(self):
         # The user is identified by their email address
-        return self.email
+        return self.first_name + self.last_name
 
     def get_short_name(self):
         # The user is identified by their email address
-        return self.email
+        return self.first_name
 
-    def __str__(self):              # __unicode__ on Python 2
-        return self.email
+    def __str__(self):
+        return self.employee_id
+
+    def __unicode__(self):
+        return self.employee_id
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -115,3 +118,7 @@ class employee_table(AbstractBaseUser):
     def is_active(self):
         "Is the user active?"
         return self.active
+
+    class Meta:
+        verbose_name = "Employee"
+        verbose_name_plural = "Employees"
