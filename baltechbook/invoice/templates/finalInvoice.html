@@ -156,9 +156,10 @@
 
 			@page { margin: 0; }
 
-			/*body {
-				background-color: #B2BAAE;
-			}*/
+			.border_left {
+				border-left: 6px solid green;
+				height: 100px; 
+			}
 
 		</style>
 	</head>
@@ -166,19 +167,25 @@
 	<body>
 		<header>
 			<h1>Invoice</h1>
-			<address>
-				<img alt="Greenzee India Pvt Ltd" src="{% static 'img/greenzeeLogo.png' %}">
-			</address>
-			<p style="text-align: right;">{{ order_record.organization_id.organization_name }}</p>
-			<p style="text-align: right;">{{ order_record.organization_id.addressLine1 }}, <br>{{ order_record.organization_id.addressLine2 }}</p>
-			<p style="text-align: right;">{{ order_record.organization_id.city }} - {{ order_record.organization_id.pincode }}</p><br>
-			<p style="text-align: right;"><i class="fas fa-headset"></i> {{ order_record.organization_id.mobileNumber }}</p>
-			<p style="text-align: right;"><i class="far fa-envelope"></i> {{ order_record.organization_id.salesEmail }}</p>
-			<p style="text-align: right;"><i class="fas fa-globe"></i> {{ order_record.organization_id.weblink }}</p>
+			
+			<div style="position: relative; width: 100%;">
+				<div style="width: 60%; position: relative; float: left;">
+					<img alt="Greenzee India Pvt Ltd" src="{% static 'img/greenzeeLogo.png' %}" style="display: block; float: left;"> 
+				</div>
+
+				<div style="width: 37%; position: relative; border-left: 4px solid #7AC656; float: left; padding-left: 10px;">
+					<p>{{ order_record.organization_id.organization_name }}</p><br>
+					<p>Corporate Office - {{ order_record.organization_id.addressLine1 }}, {{ order_record.organization_id.addressLine2 }},
+					{{ order_record.organization_id.city }} - {{ order_record.organization_id.pincode }}</p><br>
+					<p><i class="far fa-envelope"></i> {{ order_record.organization_id.salesEmail }}</p>
+					<p><i class="fas fa-globe"></i> {{ order_record.organization_id.weblink }}</p>
+					<p><i class="fas fa-headset"></i> +91 {{ order_record.organization_id.mobileNumber }}</p>
+				</div>
+			</div>
 		</header>
 		<hr>
 		<article>
-			<h2>Recipient:</h2>
+			<h2><i>Recipient:</i></h2><br>
 			<address>
 				<p>{{ order_record.customer_id.name }}</p>
 				<p style="font: 15px Italic;">{{ customer_address.address }}</p>
