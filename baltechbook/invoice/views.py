@@ -34,7 +34,7 @@ def orderInitDetails(request):
     user = get_user_model()
 
     # Extracting organization_code
-    organization = organization_table.objects.get(organization_id=1)
+    organization = organization_table.objects.all().first()
     orgCode = organization.org_code
     orgId = organization.organization_id
 
@@ -58,7 +58,7 @@ def orderInitDetails(request):
     initial_data = {
         'order_id': orderId,
         'order_number': order_code,
-        'organization_id': organization_ID,
+        'organization_id': orgId,
         'employee_id': employeeId,
     }
 

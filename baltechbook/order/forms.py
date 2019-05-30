@@ -25,7 +25,7 @@ class ProductsOrderForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             if field_name == 'delivery_date':
-                field.widget.attrs['placeholder'] = 'Enter in the following format DD-MM-YYYY'
+                field.widget.attrs['placeholder'] = 'Enter in the following format YYYY-MM-DD'
             elif field_name == 'quantity':
                 field.widget.attrs['placeholder'] = 'Enter a number'
 

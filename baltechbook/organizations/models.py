@@ -24,5 +24,5 @@ class organization_table(models.Model):
         return self.organization_name
 
     def __unicode__(self):
-        return self.organization_name
+        return unicode(self.organization_name)
 
