@@ -141,3 +141,5 @@ AUTH_USER_MODEL = 'accounts.employee_table'
 
 # Setting up Date Input Format for Forms
 DATE_INPUT_FORMAT = ['%d-%m-%Y']
+
+
