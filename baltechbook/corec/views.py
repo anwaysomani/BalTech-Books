@@ -5,7 +5,12 @@ from django.contrib.auth import get_user_model
 
 def dashboard(request):
     user = get_user_model()
+
+    organization = organization_table.objects.all().first()
+    id = organization.organization_id
+
     context = {
+        'id': id,
         user : 'user',
     }
     return render(request, 'dashboard.html', context)
