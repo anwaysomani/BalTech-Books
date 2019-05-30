@@ -111,6 +111,7 @@ def accept_customer_record(request, id):
     form_new = CustomerBasicDetailForm(request.POST)
 
     context = {
+        'id': id,
         'list': customer_records,
         'form_existing': form_existing,
         'form_new': form_new,
@@ -177,6 +178,8 @@ def accept_customer_address(request, id, cust_id):
     form_new = NewCustomerAddressForm(request.POST or None, initial=initial_data)
 
     context = {
+        'id': id,
+        'cust_id': cust_id,
         'address_list': address_list,
         'form_existing': form_existing,
         'form_new': form_new,
@@ -250,6 +253,7 @@ def payment(request, id):
     payment_form = PaymentForm(request.POST or None, initial=initial_data)
 
     context = {
+        'id': id,
         'payment_form': payment_form,
         'order_record': order_record,
         'all_products': all_products,
@@ -276,7 +280,8 @@ def generate_invoice(request, id):
     customer_address = customer_address_table.objects.get(customer_address_id=required_address_id)
     payment_record = payment_table.objects.get(order_id=id)
 
-    context = { 
+    context = {
+        'id': id,
         'order_record': order_record,
         'all_products': all_products,
         'customer_info': customer_info,

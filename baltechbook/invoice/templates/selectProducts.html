@@ -4,6 +4,16 @@
 <html>
 <head>
 	{% include 'reqs/headerBar.html' %}
+
+	<style type="text/css">
+		.disable {
+			color: currentColor;
+			cursor: not-allowed;
+			opacity: 0.5;
+			text-decoration: none;
+			pointer-events: none;
+		}
+	</style>
 </head>
 
 <!-- 
@@ -18,6 +28,33 @@
 	{% include 'reqs/navbar.html' %}
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<!-- New Invoice Begins -->
+		<nav class="navbar navbar-light bg-light">
+		  <a class="navbar-brand">
+		    <i class="fas fa-file-invoice"></i>
+		  </a>
+		  <!-- Add Items to Cart -->
+		  <a class="navbar-brand">
+		  	<i class="fas fa-long-arrow-alt-right"></i>
+		    <i class="fas fa-cart-plus"></i>
+		  </a>
+		  <!-- Customer Personal Info -->
+		  <a class="navbar-brand disable">
+		  	<i class="fas fa-long-arrow-alt-right"></i>
+		    <i class="fas fa-user-lock"></i>
+		  </a>
+		  <!-- Customer Location Info -->
+		  <a class="navbar-brand disable">
+		  	<i class="fas fa-long-arrow-alt-right"></i>
+		    <i class="fas fa-map-marked-alt"></i>
+		  </a>
+		  <!-- Checkout -->
+		  <a class="navbar-brand disable">
+		  	<i class="fas fa-long-arrow-alt-right"></i>
+		    <i class="fas fa-cash-register"></i>
+		  </a> 	
+		</nav>
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>New Invoice Details</h2>
@@ -62,7 +99,7 @@
 				</form>
 				<div class="col-md-12">
 					<hr>
-					<a href="{%  url 'customer-records' id=id %}"><button class="btn btn-default btn-md pull-right">Proceed to Customer Information <i class="fas fa-id-card"></i></button></a>
+					<a href="{%  url 'customer-records' id=id %}"><button class="btn btn-default btn-md pull-right btn-success">Proceed to Customer Information <i class="fas fa-id-card"></i></button></a>
 				</div>
 			</div>
 		</div>
