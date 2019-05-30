@@ -14,7 +14,7 @@
 				<li><a href="#">
 					<i class="fas fa-users-cog"></i>
 				</a></li>
-				<li class="active"><a href="{% url 'team' id %}">Team</a></li>
+				<li class="active"><a href="{% url 'team' %}">Team</a></li>
 				<li class="active">{{ member.first_name }} {{ member.last_name }}</li>
 			</ol>
 		</div>
@@ -22,7 +22,6 @@
 		<div class="panel panel-container">
 			<h2 class="text-center">{{ member.first_name }} {{ member.last_name }}</h2>
 			<hr>
-
 			<div class="col-md-8">
 				<div class="panel panel-default ">
 					<div class="panel panel-default articles">
