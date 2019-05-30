@@ -40,6 +40,11 @@ class NewCustomerAddressForm(forms.ModelForm):
             'customer_id': forms.Select(attrs={'readonly': True})
         }
 
+        labels = {
+                'phoneNumber': 'Alternate Mobile Number',
+                'email': 'Alternate Email Address',
+        }
+
     def __init__(self, *args, **kwargs):
         super(NewCustomerAddressForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():

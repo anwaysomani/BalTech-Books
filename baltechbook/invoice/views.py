@@ -25,11 +25,6 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, 
 def invoice(request):
     return render(request, 'invoice.html', {})
 
-
-#def newInvoice(request):
-#    return render(request, 'newInvoice.html', {})
-
-
 def orderInitDetails(request):
     user = get_user_model()
 
