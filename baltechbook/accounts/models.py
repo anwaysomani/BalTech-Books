@@ -1,100 +1,116 @@
-from __future__ import unicode_literals
 from django.db import models
-from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from organizations.models import *
+from django.contrib.auth.models import (
+    UserManager, BaseUserManager, AbstractBaseUser
+)
+
 from invoice.constants import STATES, COUNTRIES
 
-import uuid
+from organizations.models import organization_table
 
-# Employee auth
-class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password, **kwargs):
-        if not email or not password:
-            raise ValueError('User must have a username and password')
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None):
+        """
+        Creates and saves a User with the given email and password.
+        """
+        if not email:
+            raise ValueError('Users must have an email address')
+
         user = self.model(
-            email=CustomUserManager.normalize_email(email),
-            **kwargs
+            email=self.normalize_email(email),
         )
 
         user.set_password(password)
-        user.save()
-
+        user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, **kwargs):
-        user = self.create_user(email, password,**kwargs)
-
-        user.is_admin = True
-        user.is_staff = True
-        user.save()
-
+    def create_staffuser(self, email, password):
+        """
+        Creates and saves a staff user with the given email and password.
+        """
+        user = self.create_user(
+            email,
+            password=password,
+        )
+        user.staff = True
+        user.save(using=self._db)
         return user
 
+    def create_superuser(self, email, password):
+        """
+        Creates and saves a superuser with the given email and password.
+        """
+        user = self.create_user(
+            email,
+            password=password,
+        )
+        user.staff = True
+        user.admin = True
+        user.save(using=self._db)
+        return user
 
-# Employee Privileges
-class employee_privilege_table(models.Model):
-    privilege_id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=45)
-    permissions = models.CharField(max_length=40)
-    max_allowed_members = models.IntegerField()
-    current_members = models.IntegerField
-
-    def __str__(self):
-            return self.title
-
-    class Meta:
-        verbose_name = "Employee's Privilege"
-        verbose_name_plural = "Employee's Privileges"
-
-# Contstants: userType, city, state, country
 class employee_table(AbstractBaseUser):
-    employee_id = models.CharField(max_length=20, null=True, blank=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email = models.EmailField(unique=True)
-    mobileNumber = models.CharField(max_length=10, null=True, blank=True)
-    address = models.CharField(max_length=200, null=True, blank=True)
-    city = models.CharField(max_length=30, null=True, blank=True)
-    pincode = models.IntegerField(null=True)
-    state = models.CharField(max_length=35, null=True, choices=STATES)
-    country = models.CharField(max_length=50, null=True, choices=COUNTRIES)
+    email = models.EmailField(
+        verbose_name='email address',
+        max_length=255,
+        unique=True,
+    )
+    active = models.BooleanField(default=True)
+    staff = models.BooleanField(default=False) # a admin user; non super-user
+    admin = models.BooleanField(default=False) # a superuser
+
+    # Custom defined fields
+    employee_id = models.CharField(max_length=8, null=True, blank=True) 
+    first_name = models.CharField(max_length=30, null=True, blank=True)
+    last_name = models.CharField(max_length=30, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
+    pincode = models.IntegerField(null=True, blank=True)
+    state = models.CharField(max_length=35, choices=STATES, null=True, blank=True)
+    country = models.CharField(max_length=35, choices=COUNTRIES, null=True, blank=True)
     organization_id = models.ForeignKey(organization_table, null=True, blank=True)
-    privilege_id = models.ForeignKey(employee_privilege_table, null=True, blank=True)
-    joining_date = models.DateField(auto_now=True, null=True, blank=True)
-    last_login = models.DateTimeField(null=True)
+    designation = models.CharField(max_length=25, null=True, blank=True)
+    employee_type = models.CharField(max_length=20, null=True, blank=True)
     termination_date = models.DateField(null=True, blank=True)
-    is_user = models.NullBooleanField()
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=True)
 
-    api_token = models.UUIDField(default=uuid.uuid4, editable=False)
-    token_created_date = models.DateTimeField(auto_now_add=True)
+    # notice the absence of a "Password field", that's built in.
 
-    objects = CustomUserManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['employee_id', 'first_name', 'mobileNumber']
+    REQUIRED_FIELDS = [] # Email & Password are required by default.
 
-    def get_short_name(self):
-        return self.first_name
-
-    def has_perm(self, perm, obj=None):
-        return self.is_staff
-
-    def has_module_perms(self, app_label):
-        return self.is_staff
-
-    def api_token_reset(self):
-        self.api_token = models.UUIDField(default=uuid.uuid4, editable=False)
-
-    def __unicode__(self):
+    def get_full_name(self):
+        # The user is identified by their email address
         return self.email
 
-    class Meta:
-        verbose_name = "Employee"
-        verbose_name_plural = "Employees"
+    def get_short_name(self):
+        # The user is identified by their email address
+        return self.email
 
+    def __str__(self):              # __unicode__ on Python 2
+        return self.email
 
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        return self.staff
+
+    @property
+    def is_admin(self):
+        "Is the user a admin member?"
+        return self.admin
+
+    @property
+    def is_active(self):
+        "Is the user active?"
+        return self.active
