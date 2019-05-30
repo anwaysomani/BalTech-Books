@@ -29,14 +29,32 @@
 				<form method="POST">
 					{% csrf_token %}
 					<div class="form-row">
-						{% for field in form.visible_fields %}
-							<div class="form-group col-md-6">
-								<label>{{ field.label_tag }}</label>
-								{{ field }}
-							</div>
-							{{ field.errors }}
-						{% endfor %}
-
+						<div class="form-group col-md-6">
+							<label>{{ form.product_id.label_tag }}</label>
+							{{ form.product_id }}
+						</div>
+						{{ form.product_id.errors }}
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>{{ form.quantity.label_tag }}</label>
+							{{ form.quantity }}
+						</div>
+						{{ form.quantity.errors }}
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>{{ form.delivery_date.label_tag }}</label>
+							{{ form.delivery_date }}
+						</div>
+						{{ form.delivery_date.errors }}
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>{{ form.order_id.label_tag }}</label>
+							{{ form.order_id }}
+						</div>
+						{{ form.order_id.errors }}
 					</div>
 					<div class="col-md-12">
 						<button type="submit" class="btn btn-default btn-md" name="add_to_cart">Add To Cart <i class="fas fa-shopping-cart"></i></button>
