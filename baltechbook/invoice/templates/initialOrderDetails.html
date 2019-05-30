@@ -69,24 +69,24 @@
 						<label class="col-md-3 control-label" for="name">{{ form.order_number.label_tag }}</label>
 						<div class="col-md-9">
 							{{ form.order_number }}
+							{{ form.order_number.errors }}
 						</div>
-						{{ form.order_number.errors }}
 					</div>
 					<legend>Organization Info</legend>
 					<div class="form-group">
 						<label class="col-md-3 control-label" for="name">{{ form.organization_id.label_tag }}</label>
 						<div class="col-md-9">
 							{{ form.organization_id }}
+							{{ form.organization_id.errors }}
 						</div>
-						{{ form.organization_id.errors }}
 					</div>
 					<legend>Employee Info</legend>
 					<div class="form-group">
 						<label class="col-md-3 control-label" for="name">{{ form.employee_id.label_tag }}</label>
 						<div class="col-md-9">
 							{{ form.employee_id }}
+							{{ form.employee_id.errors }}
 						</div>
-						{{ form.employee_id.errors }}
 					</div>
 					<div class="form-group">
 						<div class="col-md-12">

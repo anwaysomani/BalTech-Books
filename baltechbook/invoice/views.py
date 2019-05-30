@@ -52,6 +52,9 @@ def orderInitDetails(request):
     obj = get_user_model().objects.first()
     employeeId = getattr(obj, field_name)
 
+    field_email = 'email'
+    employee_mail = getattr(obj, field_email)
+
     # Printing order_number via domain
     order_code = orgCode + str(orgId) + str(employeeId) + "." + str(orderId)
 
@@ -70,11 +73,13 @@ def orderInitDetails(request):
     # Declaring form for init order details
     form = order_init_details(request.POST or None, initial=initial_data)
 
-    if form.is_valid():
-        form.save()
-        return redirect('product-order' ,orderId)
-    else:
-        form = order_init_details(initial=initial_data)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect('product-order' ,orderId)
+        else:
+            print(form.errors)
+            form = order_init_details(initial=initial_data)
 
     context = {
         'orderId': orderId,
