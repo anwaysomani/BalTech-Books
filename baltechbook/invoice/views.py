@@ -23,7 +23,17 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, 
 
 # ------------------------------------------------------------------------------
 def invoice(request):
-    return render(request, 'invoice.html', {})
+    organization = organization_table.objects.all().first()
+    organization_id = organization.organization_id
+
+    orders = order_table.objects.all().order_by('-order_id')
+
+    context = {
+        'organization_id': organization_id,
+        'orders': orders,
+    }
+
+    return render(request, 'invoice.html', context)
 
 def orderInitDetails(request):
     user = get_user_model()

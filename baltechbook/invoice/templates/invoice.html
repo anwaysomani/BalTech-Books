@@ -11,6 +11,15 @@
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<i class="fas fa-file-invoice"></i>
+				</a></li>
+				<li class="active">Invoice</li>
+			</ol>
+		</div>
+
+		<div class="row">
 			<div class="col-lg-12">
 				<h2>Invoice</h2>
 			</div>
@@ -22,6 +31,37 @@
 			</button>
 		</a>
 		<br><br>
+
+		<div class="col-md-12">
+			<div class="panel panel-default articles">
+				<div class="panel-heading">
+					Latest News
+				</div>
+				<div class="panel-body articles-container">
+					{% for order in orders %}
+						<div class="article border-bottom">
+							<div class="col-xs-12">
+								<div class="row">
+									<div class="col-xs-2 col-md-2 date">
+										<div class="large">30</div>
+										<div class="text-muted">Jun</div>
+									</div>
+									<div class="col-xs-8 col-md-8">
+										<h4><a href="#">{{ order.customer_id.name }}</a></h4>
+										<p></p>
+									</div>
+									<div class="col-xs-2 col-md-2 date">
+										<div class="large">30</div>
+										<div class="text-muted">Jun</div>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
 	</div>
 
 {% include 'reqs/footerScripts.html' %}
