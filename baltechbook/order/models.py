@@ -60,9 +60,9 @@ class product_order_table(models.Model):
 class payment_table(models.Model):
     payment_id = models.IntegerField(primary_key=True)
     order_id = models.ForeignKey(order_table)
-    actual_amount = models.DecimalField(max_digits=7, decimal_places=2)
-    discount = models.DecimalField(max_digits=3, decimal_places=2)
-    payable_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    actual_amount = models.DecimalField(max_digits=15, decimal_places=2)
+    discount = models.IntegerField()
+    payable_amount = models.DecimalField(max_digits=15, decimal_places=2)
     mode_of_payment = models.CharField(max_length=7, choices=MODE_OF_PAYMENT, default="Cash")
 
 
