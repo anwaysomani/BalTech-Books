@@ -19,17 +19,63 @@
 		</div>
 
 		<div class="row">
+			<br>
 			<legend class="text-center">OUR SATISFIED CUSTOMER BASE</legend>
-			<a href="">
-				<button type="button" class="btn btn-md btn-primary" style="width: 100%;">
-					Create A New Product
-				</button>
-			</a>
 			<br><br>
+
+			<div class="form-group">
+				<label class="col-md-3 control-label" for="name">Search Customer</label>
+				<div class="col-md-9">
+					<input type="text" id="any_customer" onkeyup="searchFunc()" placeholder="Start typing characters" title="Type in a name" class="form-control">
+					<!-- <input id="name" name="name" type="text" placeholder="Your name" class="form-control"> -->
+				</div>
+			</div>
+			<br><hr>
+
+			<ul style="list-style-type:none;" id="customer_list">
+				{% for customer in customers %}
+					<li>
+						<a href="">
+							<div class="col-md-4">
+								<div class="panel panel-danger">
+									<div class="panel-heading text-center">
+										{{ customer.name }}
+									</div>
+									<div class="panel-body">
+										<p><i class="fas fa-phone-square"></i> {{ customer.mobileNumber }}</p>
+										<p><i class="fas fa-envelope-square"></i> {{ customer.email }}</p>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+
 		</div>
 	</div>
 	
 	{% include 'reqs/footerScripts.html' %}
+
+	<!-- Querying Live Customer List -->
+	<script type="text/javascript">
+		function searchFunc() {
+		    var input, filter, ul, li, a, i, txtValue;
+		    input = document.getElementById("any_customer");
+		    filter = input.value.toUpperCase();
+		    ul = document.getElementById("customer_list");
+		    li = ul.getElementsByTagName("li");
+		    for (i = 0; i < li.length; i++) {
+		        a = li[i].getElementsByTagName("a")[0];
+		        txtValue = a.textContent || a.innerText;
+		        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		            li[i].style.display = "";
+		        } else {
+		            li[i].style.display = "none";
+		        }
+		    }
+		}
+	</script>
 		
 </body>
 </html>
