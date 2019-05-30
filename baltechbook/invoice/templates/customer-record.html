@@ -38,13 +38,22 @@
 						{% endif %}
 					
 					<div class="form-row">
-						{% for field in form_new %}
-							<div class="form-group col-md-6">
-								<label>{{ field.label_tag }}</label>
-								{{ field }}
-								{{ field.errors }}
-							</div>
-						{% endfor %}
+						<div class="form-group col-md-6">
+							<label>{{ form_new.name.label_tag }}</label>
+							{{ form_new.name }}
+							{{ form_new.name.errors }}
+						</div>
+						<div class="form-group col-md-6">
+							<label>{{ form_new.mobileNumber.label_tag }}</label>
+							{{ form_new.mobileNumber }}
+							{{ form_new.mobileNumber.errors }}
+						</div>
+						<div class="form-group col-md-6">
+							<label>{{ form_new.email.label_tag }}</label>
+							{{ form_new.email }}
+							{{ form_new.email.errors }}
+						</div>
+						
 
 					</div>
 					<div class="col-md-12">
