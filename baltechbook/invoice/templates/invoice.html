@@ -32,31 +32,39 @@
 		</a>
 		<br><br>
 
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="name">Search Customer</label>
+			<div class="col-md-9">
+				<input type="text" id="select_invoice" onkeyup="searchFunc()" placeholder="Start typing characters" title="Type in a name" class="form-control">
+			</div>
+		</div>
+
+		<br><hr>
 		<div class="col-md-12">
 			<div class="panel panel-default articles">
 				<div class="panel-heading">
-					Latest News
+					Earlier Invoices
 				</div>
 				<div class="panel-body articles-container">
-					<ul style="list-style-type:none;">
+					<ul style="list-style-type:none;" id="all_invoices">
 						{% for order in orders %}
 							<li>
 								<div class="article border-bottom">
 									<div class="col-xs-12">
 										<div class="row">
 											<div class="col-xs-2 col-md-2 date">
-												<div class="large">30</div>
+												<div class="large">{{ order.creation_date.day }}</div>
 												<div class="text-muted">Jun</div>
 											</div>
 											<div class="col-xs-8 col-md-8">
-												<h4><a href="#">{{ order.customer_id.name }}</a></h4>
+												<h6><a href="#">{{ order.customer_id.name }}</a></h4>
 												<p>{{ order.employee_id.first_name }} {{ order.employee_id.last_name }}</p>
-												<button class="btn-success">{{ order.status }}</button>
+												<!-- <button class="btn-success">{{ order.status }}</button> -->
 											</div>
-											<div class="col-xs-2 col-md-2 date">
+											<!-- <div class="col-xs-2 col-md-2 date">
 												<div class="large">30</div>
 												<div class="text-muted">Jun</div>
-											</div>
+											</div> -->
 										</div>
 									</div>
 									<div class="clear"></div>
@@ -69,7 +77,27 @@
 		</div>
 	</div>
 
-{% include 'reqs/footerScripts.html' %}
+	{% include 'reqs/footerScripts.html' %}
+
+	<!-- Querying Live Customer List -->
+	<script type="text/javascript">
+		function searchFunc() {
+		    var input, filter, ul, li, a, i, txtValue;
+		    input = document.getElementById("select_invoice");
+		    filter = input.value.toUpperCase();
+		    ul = document.getElementById("all_invoices");
+		    li = ul.getElementsByTagName("li");
+		    for (i = 0; i < li.length; i++) {
+		        a = li[i].getElementsByTagName("a")[0];
+		        txtValue = a.textContent || a.innerText;
+		        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		            li[i].style.display = "";
+		        } else {
+		            li[i].style.display = "none";
+		        }
+		    }
+		}
+	</script>
 
 </body>
 </html>
