@@ -34,6 +34,7 @@
 							<!-- <input id="pass" type="password" class="input" data-type="password"> -->
 
 							{% render_field field class="input" %}
+							{% field.errors %}
 							{% if field.help_text %}
 						        <small class="form-text text-muted">{{ field.help_text }}</small>
 					      	{% endif %}					
