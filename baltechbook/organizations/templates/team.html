@@ -20,9 +20,9 @@
 
 		<div class="row">
 			<legend class="text-center">THE GREENZEE TEAM</legend>
-			<legend>SALES EXECUTIVE</legend>
+			<legend class="text-center">SALES EXECUTIVE</legend>
 			{% for sale_member in all_sales_members %}
-				<a href="{% url 'team-member' member.employee_id %}">
+				<a href="{% url 'team-member' %}{{ sale_member.employee_id }}">
 					<div class="col-md-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">{{ sale_member.first_name }} {{ sale_member.last_name }}</div>
@@ -30,14 +30,14 @@
 								<p>{{ sale_member.designation }}</p>
 								<p></p>
 								<p>{{ sale_member.city }}, {{ sale_member.state }}</p>
-								<div class="col-xs-4 col-md-4 date">
+								<div class="col-xs-6 col-md-6 date">
 									<div class="large">{{ sale_member.employee_id }}</div>
 									<div class="text-muted">Employee ID</div>
 								</div>
-								<div class="col-xs-4 col-md-4 date">
+								<!-- <div class="col-xs-4 col-md-4 date">
 									<div class="large">0</div>
 									<div class="text-muted">Generated Invoices</div>
-								</div>
+								</div>-->
 								<div class="col-xs-4 col-md-4 date">
 									<div class="large">0</div>
 									<div class="text-muted">Monthly Stat</div>
@@ -50,9 +50,9 @@
 		</div>
 
 		<div class="row">
-			<legend class="text-center">THE GREENZEE TEAM</legend>
+			<legend class="text-center">MEMBERS</legend>
 			{% for member in all_members %}
-				<a href="{% url 'team-member' member.employee_id %}">
+				<a href="{% url 'team-member' %}{{ member.employee_id }}">
 					<div class="col-md-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">{{ member.first_name }} {{ member.last_name }}</div>
@@ -60,14 +60,14 @@
 								<p>{{ member.designation }}</p>
 								<p></p>
 								<p>{{ member.city }}, {{ member.state }}</p>
-								<div class="col-xs-4 col-md-4 date">
+								<div class="col-xs-6 col-md-6 date">
 									<div class="large">{{ member.employee_id }}</div>
 									<div class="text-muted">Employee ID</div>
 								</div>
-								<div class="col-xs-4 col-md-4 date">
+								<!-- <div class="col-xs-4 col-md-4 date">
 									<div class="large">0</div>
 									<div class="text-muted">Generated Invoices</div>
-								</div>
+								</div> -->
 								<div class="col-xs-4 col-md-4 date">
 									<div class="large">0</div>
 									<div class="text-muted">Monthly Stat</div>

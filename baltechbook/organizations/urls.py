@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     url(r'team/$', views.team, name='team'),
-    url(r'team/member/(?P<emp_id>\d+)/$', views.team_member, name='team-member'),
+    url(ur'team/member/<emp_id>/$', views.team_member, name='team-member'),
 ]
