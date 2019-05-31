@@ -22,7 +22,7 @@
 			<legend class="text-center">THE GREENZEE TEAM</legend>
 			<legend class="text-center">SALES EXECUTIVE</legend>
 			{% for sale_member in all_sales_members %}
-				<a href="{% url 'team-member' %}{{ sale_member.employee_id }}">
+				<a href="{% url 'team-member' sale_member.employee_id %}">
 					<div class="col-md-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">{{ sale_member.first_name }} {{ sale_member.last_name }}</div>
@@ -52,7 +52,7 @@
 		<div class="row">
 			<legend class="text-center">MEMBERS</legend>
 			{% for member in all_members %}
-				<a href="{% url 'team-member' %}{{ member.employee_id }}">
+				<a href="{% url 'team-member' member.employee_id %}">
 					<div class="col-md-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">{{ member.first_name }} {{ member.last_name }}</div>
