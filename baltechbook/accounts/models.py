@@ -71,6 +71,8 @@ class employee_table(AbstractBaseUser):
     organization_id = models.ForeignKey(organization_table, null=True, blank=True)
     designation = models.CharField(max_length=25, null=True, blank=True)
     employee_type = models.CharField(max_length=20, choices=EMPLOYEE_TYPE, null=True, blank=True)
+    salary = models.IntegerField(null=True, blank=True)
+    joining_date = models.DateField(null=True, blank=True)
     termination_date = models.DateField(null=True, blank=True)
 
     # notice the absence of a "Password field", that's built in.
@@ -89,10 +91,10 @@ class employee_table(AbstractBaseUser):
         return self.first_name
 
     def __str__(self):
-        return self.employee_id
+        return self.first_name + " " +  self.last_name
 
     def __unicode__(self):
-        return self.employee_id
+        return self.first_name + " " + self.last_name
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

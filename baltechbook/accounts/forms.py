@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-
 from .models import employee_table
-
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -26,7 +24,6 @@ class RegisterForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
-
 
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -54,7 +51,6 @@ class UserAdminCreationForm(forms.ModelForm):
             user.save()
         return user
 
-
 class UserAdminChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on
     the user, but replaces the password field with admin's
@@ -71,5 +67,4 @@ class UserAdminChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
-
 
