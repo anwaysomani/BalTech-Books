@@ -15,14 +15,6 @@
 	</style>
 </head>
 
-<!-- 
-	Pattern:
-	- order_id & order_num
-	- Product to be purchased
-	- Customer information
-	- Checkout
--->
-
 <body>
 	{% include 'reqs/navbar.html' %}
 
@@ -80,14 +72,7 @@
 							{{ form.organization_id.errors }}
 						</div>
 					</div>
-					<legend>Employee Info</legend>
-					<div class="form-group">
-						<label class="col-md-3 control-label" for="name">{{ form.employee_id.label_tag }}</label>
-						<div class="col-md-9">
-							{{ form.employee_id }}
-							{{ form.employee_id.errors }}
-						</div>
-					</div>
+					<hr>
 					<div class="form-group">
 						<div class="col-md-12">
 							<button type="submit" class="btn btn-default btn-md pull-right btn-primary btn-success">

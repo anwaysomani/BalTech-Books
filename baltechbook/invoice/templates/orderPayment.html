@@ -88,6 +88,11 @@
 						{{ payment_form.mode_of_payment }}
 						{{ payment_form.mode_of_payment.errors }}
 					</div>
+					<div class="form-group col-md-6">
+						<label>{{ payment_form.sales_executive.label_tag }}</label>
+						{{ payment_form.sales_executive }}
+						{{ payment_form.sales_executive.errors }}
+					</div>
 					<div class="form-group col-md-12">
 						<button class="btn btn-default btn-md btn-success" value="submit">
 							Generate Invoice <i class="fas fa-file-invoice"></i>

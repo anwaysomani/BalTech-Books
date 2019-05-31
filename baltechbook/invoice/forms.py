@@ -6,10 +6,9 @@ from order.models import *
 class order_init_details(forms.ModelForm):
     class Meta:
         model = order_table
-        fields = {'order_number', 'organization_id', 'employee_id'}
+        fields = {'order_number', 'organization_id'}
         widgets = {
             'order_number': forms.TextInput(attrs={'class': "form-control", 'readonly': True}),
             'organization_id': forms.TextInput(attrs={'class': "form-control", 'readonly': True}),
-            'employee_id': forms.TextInput(attrs={'class': "form-control", 'readonly': True})
         }
 

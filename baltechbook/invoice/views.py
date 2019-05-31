@@ -67,7 +67,6 @@ def orderInitDetails(request):
         'order_id': orderId,
         'order_number': order_code,
         'organization_id': orgId,
-        'employee_id': employeeId,
     }
 
     # Declaring form for init order details
@@ -108,11 +107,8 @@ def select_products_for_order(request, id):
         new_data = form.save(commit=False)
         prod_id = form.cleaned_data['product_id']
         quant = form.cleaned_data['quantity']
-
-        #print(new_data.order_id)
-        #new_data.order_id = id
-             
         new_data.save(prod_id, quant)
+        form = ProductsOrderForm(request.POST or None, initial=initial_data)
 
     else:
         form = ProductsOrderForm(request.POST or None, initial=initial_data)
@@ -279,7 +275,17 @@ def payment(request, id):
 
     if request.method=='POST':
         if payment_form.is_valid():
+            sales_exec = payment_form.cleaned_data['sales_executive']
+            
+            # Fetch order object
+            update_record = order_table.objects.get(order_id=id)
+            # Assign customer_address instance to order table
+            update_record.employee_id = sales_exec
+            # Save updated order_table instance
+            update_record.save()
+            # Save payment form data
             payment_form.save()
+
             return redirect('final-invoice', id)
         else:
             print(payment_form.errors)

@@ -9,6 +9,7 @@ GST = [
 GST_RATE = [
     (0, '0%'),
     (5, '5%'),
+    (6, '6%'),
     (12, '12%'),
     (18, '18%'),
     (28, '28%'),
@@ -105,3 +106,9 @@ WEBPAGE_REF = [
     ('Team', 'Team'),
 ]
 
+# Type of Employee
+EMPLOYEE_TYPE = [
+    ('Administrator', 'Administrator'),
+    ('Sales Executive', 'Sales Executive'),
+    ('Intern', 'Intern'),
+]

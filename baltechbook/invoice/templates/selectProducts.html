@@ -16,14 +16,6 @@
 	</style>
 </head>
 
-<!-- 
-	Pattern:
-	- order_id & order_num
-	- Product to be purchased
-	- Customer information
-	- Checkout
--->
-
 <body>
 	{% include 'reqs/navbar.html' %}
 
@@ -125,20 +117,13 @@
 					      <td>{{ products.product_id }}</td>
 					      <td>{{ products.quantity }}</td>
 					      <td>{{ products.delivery_date }}</td>
-					      <td><button class="btn btn-danger">Remove</button></td>
+					      <td><button class="btn btn-warning">Edit</button> <button class="btn btn-danger">Remove</button></td>
 					    </tr>
 				  	{% endfor %}
 				  </tbody>
 				</table>
 			</div>
-		</div>
-
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<h2>Add a New Product</h2>(undergoing construction)
-			</div>
-		</div>
-			
+		</div>			
 	</div>
 
 	{% include 'reqs/footerScripts.html' %}
