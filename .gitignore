@@ -1,12 +1,12 @@
 /Greenzee Invoice Software/nbproject/private/
 /Greenzee Invoice Software/build/
 
-.swp
-.swo
+*.swp
+*.swo
 
-migrations/
+migrations/*
 
-db.sqlite3
+*.sqlite3
+*.txt
 
-requirements.txt
-
+*.pyc
