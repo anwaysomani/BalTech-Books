@@ -59,7 +59,7 @@ class employee_table(AbstractBaseUser):
     admin = models.BooleanField(default=False) # a superuser
 
     # Custom defined fields
-    employee_id = models.CharField(max_length=8, primary_key=True)
+    employee_id = models.CharField(max_length=8)
     mobile_number = models.CharField(max_length=10, null=True, blank=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
