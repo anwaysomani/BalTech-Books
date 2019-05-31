@@ -4,8 +4,8 @@ from accounts.models import employee_table
 
 # team member view
 def team(request):
-    all_members_list = employee_table.objects.filter().order_by('employee_id')
-    all_sales_members_list = employee_table.objects.filter(employee_type="Sales Executive")
+    all_members_list = employee_table.objects.filter(employee_type="Administrator").order_by('employee_id')
+    all_sales_members_list = employee_table.objects.filter(employee_type="Sales Executive").order_by('city')
 
     context = {
         'all_members': all_members_list,
