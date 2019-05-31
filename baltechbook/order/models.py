@@ -53,8 +53,11 @@ class product_order_table(models.Model):
         return str(self.product_order_id)
 
     def __unicode__(self):
-            return unicode(str(self.product_order_id))
-    
+        return unicode(str(self.product_order_id))
+
+    class Meta:
+        verbose_name = "Product Order"
+        verbose_name_plural = "Product Orders"
 
 # Payment
 class payment_table(models.Model):
@@ -65,6 +68,9 @@ class payment_table(models.Model):
     payable_amount = models.DecimalField(max_digits=15, decimal_places=2)
     mode_of_payment = models.CharField(max_length=7, choices=MODE_OF_PAYMENT, default="Cash")
 
+    class Meta: 
+        verbose_name = "Checkout"
+        verbose_name_plural = "Checkout"
 
 # Order Delivery Records
 class delivery_record_table(models.Model):
@@ -72,4 +78,8 @@ class delivery_record_table(models.Model):
     order_id = models.ForeignKey(order_table)
     delivery_date = models.DateField()
     actual_delivery_date = models.DateField()
+
+    class Meta:
+        verbose_name = "Delivery Record"
+        verbose_name_plural = "Delivery Records"
 

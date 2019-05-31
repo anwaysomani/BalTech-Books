@@ -26,3 +26,7 @@ class organization_table(models.Model):
     def __unicode__(self):
         return unicode(self.organization_name)
 
+    class Meta:
+        verbose_name = "Organization"
+        verbose_name_plural = "Organizations"
+

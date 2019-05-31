@@ -15,6 +15,10 @@ class customer_table(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Customer"
+        verbose_name_plural = "Customers"
+
 # Customer Address
 class customer_address_table(models.Model):
     customer_address_id = models.IntegerField(primary_key=True)
@@ -30,3 +34,8 @@ class customer_address_table(models.Model):
 
     def __str__(self):
         return self.address
+
+    class Meta:
+        verbose_name = "Customer's Address"
+        verbose_name_plural = "Customers Addresses"
+

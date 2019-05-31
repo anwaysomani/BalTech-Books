@@ -12,3 +12,8 @@ class request_service_table(models.Model):
     dev_status_is_done = models.BooleanField(default=0)
     report_date = models.DateTimeField(auto_now=True)
     service_completion_date = models.DateTimeField()
+
+    class Meta:
+        verbose_name = "Service Request"
+        verbose_name_plural = "Service Requests"
+

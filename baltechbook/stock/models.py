@@ -43,6 +43,9 @@ class products_table(models.Model):
         # Calling save method
         super(products_table, self).save(*args, **kwargs)
 
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
 
 # Stock Records
 class stock_table(models.Model):
@@ -52,6 +55,9 @@ class stock_table(models.Model):
     current_quantity = models.IntegerField()
     updated_on = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = "Stock"
+        verbose_name_plural = "Stocks"
 
 # New Stock Entry
 class stock_entry_table(models.Model):
@@ -60,6 +66,9 @@ class stock_entry_table(models.Model):
     refill_quantity = models.IntegerField()
     created_on = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = "Stock Entry"
+        verbose_name_plural = "Stock Entries"
 
 # Refill Request for Stock
 class refill_request_table(models.Model):
@@ -69,4 +78,8 @@ class refill_request_table(models.Model):
     request_quantity = models.IntegerField()
     request_date = models.DateTimeField(auto_now=True)
     request_status = models.CharField(max_length=10, choices=REFILL_REQUEST_TYPE)
+
+    class Meta:
+        verbose_name = "Refill Request"
+        verbose_name_plural = "Refill Requests"
 

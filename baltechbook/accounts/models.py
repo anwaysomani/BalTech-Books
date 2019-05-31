@@ -3,8 +3,7 @@ from django.contrib.auth.models import (
     UserManager, BaseUserManager, AbstractBaseUser
 )
 
-from invoice.constants import STATES, COUNTRIES
-
+from invoice.constants import STATES, COUNTRIES, EMPLOYEE_TYPE
 from organizations.models import organization_table
 
 class UserManager(BaseUserManager):
@@ -71,7 +70,7 @@ class employee_table(AbstractBaseUser):
     country = models.CharField(max_length=35, choices=COUNTRIES, null=True, blank=True)
     organization_id = models.ForeignKey(organization_table, null=True, blank=True)
     designation = models.CharField(max_length=25, null=True, blank=True)
-    employee_type = models.CharField(max_length=20, null=True, blank=True)
+    employee_type = models.CharField(max_length=20, choices=EMPLOYEE_TYPE, null=True, blank=True)
     termination_date = models.DateField(null=True, blank=True)
 
     # notice the absence of a "Password field", that's built in.
@@ -82,11 +81,11 @@ class employee_table(AbstractBaseUser):
     REQUIRED_FIELDS = [] # Email & Password are required by default.
 
     def get_full_name(self):
-        # The user is identified by their email address
+        # The user is identified by their first and last name
         return self.first_name + self.last_name
 
     def get_short_name(self):
-        # The user is identified by their email address
+        # The user is identified by their first name
         return self.first_name
 
     def __str__(self):
