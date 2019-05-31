@@ -4,7 +4,7 @@
 *.swp
 *.swo
 
-migrations/*
+*/migrations/*
 
 *.sqlite3
 *.txt
