@@ -107,7 +107,8 @@ def select_products_for_order(request, id):
         new_data = form.save(commit=False)
         prod_id = form.cleaned_data['product_id']
         quant = form.cleaned_data['quantity']
-        new_data.save(prod_id, quant)
+        prod_price = form.cleaned_data['product_price']
+        new_data.save(prod_id, quant, prod_price)
         form = ProductsOrderForm(request.POST or None, initial=initial_data)
 
     else:

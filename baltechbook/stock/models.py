@@ -8,7 +8,7 @@ class products_table(models.Model):
     product_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=60)
     description = models.TextField(null=True, blank=True)
-    actual_price = models.DecimalField(max_digits=7, decimal_places=2)
+    actual_price = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     cgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE, default=0)
     sgst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE, default=0)
     igst_tax = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True, choices=GST_RATE, default=0)

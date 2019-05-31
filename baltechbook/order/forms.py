@@ -6,7 +6,7 @@ from invoice.constants import *
 class ProductsOrderForm(forms.ModelForm):
     class Meta:
         model = product_order_table
-        fields = {'order_id', 'product_id', 'quantity', 'delivery_date'}
+        fields = {'order_id', 'product_id', 'quantity', 'delivery_date', 'product_price'}
 
         widgets = {
             'order_id': forms.TextInput(attrs={'readonly': True})
@@ -15,6 +15,7 @@ class ProductsOrderForm(forms.ModelForm):
         labels = {
             'product_id': 'Select a Product',
             'quantity': 'Enter Supply Quantity',
+            'product_price': 'Enter Product Price',
             'delivery_date': 'Enter Delivery Date',
             'order_id': 'Order ID'
         }
@@ -32,6 +33,8 @@ class ProductsOrderForm(forms.ModelForm):
 
 # Payment form
 class PaymentForm(forms.ModelForm):
+    sales_executive = forms.ModelChoiceField(employee_table.objects.none())
+
     class Meta:
         model = payment_table
         fields = {'order_id', 'actual_amount', 'discount', 'payable_amount', 'mode_of_payment'}
@@ -42,7 +45,15 @@ class PaymentForm(forms.ModelForm):
             'payable_amount': forms.TextInput(attrs={'readonly': True})
         }
 
+        labels = {
+            'employee_id': 'Reference',
+        }
+
     def __init__(self, *args, **kwargs):
         super(PaymentForm, self).__init__(*args, **kwargs)
+        self.fields['sales_executive'].queryset = employee_table.objects.filter(employee_type="Sales Executive")
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+    def save(self, commit=True):
+        return super(PaymentForm, self).save(commit=commit)

@@ -39,14 +39,25 @@ class product_order_table(models.Model):
     product_order_id = models.AutoField(primary_key=True)
     order_id = models.ForeignKey(order_table)
     product_id = models.ForeignKey(products_table)
+    product_price = models.IntegerField()
     quantity = models.IntegerField()
     post_tax_amount = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     delivery_date = models.DateField(default="", null=True, blank=True)
 
-    def save(self, prod_name, quant, *args, **kwargs):
+    def save(self, prod_name, quant, ind_prod_value, *args, **kwargs):
         to_read = products_table.objects.values_list('post_tax_price', flat=True).get(name=prod_name)
-        value = to_read
-        self.post_tax_amount = value * quant
+        value = ind_prod_value
+        cgst = products_table.objects.values_list('cgst_tax', flat=True).get(name=prod_name)
+        sgst = products_table.objects.values_list('sgst_tax', flat=True).get(name=prod_name)
+        igst = products_table.objects.values_list('igst_tax', flat=True).get(name=prod_name)
+        cgst_proportion = cgst/100 
+        sgst_proportion = sgst/100
+        igst_proportion = igst/100
+        cgst_value = value * cgst_proportion
+        sgst_value = value * sgst_proportion
+        igst_value = value * igst_proportion
+        final_value = value + cgst_value + sgst_value + igst_value
+        self.product_price = final_value * quant
         super(product_order_table, self).save(*args, **kwargs)
 
     def __str__(self):

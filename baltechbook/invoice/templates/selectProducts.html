@@ -80,6 +80,13 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
+							<label>{{ form.product_price.label_tag }}</label>
+							{{ form.product_price }}
+						</div>
+						{{ form.product_price.errors }}
+					</div>
+					<div class="form-row">
+						<div class="form-group col-md-6">
 							<label>{{ form.order_id.label_tag }}</label>
 							{{ form.order_id }}
 						</div>
@@ -107,6 +114,7 @@
 				      <th scope="col">Product</th>
 				      <th scope="col">Quantity</th>
 				      <th scope="col">Delivery Date</th>
+				      <th scope="col">Amount</th>
 				      <th scope="col">Action</th>
 				    </tr>
 				  </thead>
@@ -117,6 +125,7 @@
 					      <td>{{ products.product_id }}</td>
 					      <td>{{ products.quantity }}</td>
 					      <td>{{ products.delivery_date }}</td>
+					      <td>{{ products.product_price }}</td>
 					      <td><button class="btn btn-warning">Edit</button> <button class="btn btn-danger">Remove</button></td>
 					    </tr>
 				  	{% endfor %}
