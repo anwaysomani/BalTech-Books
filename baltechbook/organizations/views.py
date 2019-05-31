@@ -9,7 +9,7 @@ def team(request):
 
     context = {
         'all_members': all_members_list,
-        'all_sales_members', all_sales_members_list,
+        'all_sales_members': all_sales_members_list,
     }
 
     return render(request, 'team.html', context)
