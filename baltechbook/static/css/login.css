@@ -1,12 +1,10 @@
-@import "compass/css3";
-
 * { box-sizing: border-box; }
 
 body {
   font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
   color:white;
   font-size:12px;
-  background:#333 url(/images/classy_fabric.png);
+  background:#333;
 }
 
 form {
@@ -49,6 +47,7 @@ form:before {
 }
 
 form h1 {
+  color: lightgreen;
   font-size:18px;
   text-shadow:0 1px 0 black;
   text-align:center;
@@ -79,6 +78,7 @@ label {
 
 input[type=text],
 input[type=password] {
+  color: white;
   width:100%;
   padding:8px 5px;
   background:linear-gradient(#1f2124, #27292c);
