@@ -20,6 +20,37 @@
 
 		<div class="row">
 			<legend class="text-center">THE GREENZEE TEAM</legend>
+			<legend>SALES EXECUTIVE</legend>
+			{% for member in all_sales_members %}
+				<a href="{% url 'team-member' member.employee_id %}">
+					<div class="col-md-4">
+						<div class="panel panel-info">
+							<div class="panel-heading">{{ member.first_name }} {{ member.last_name }}</div>
+							<div class="panel-body">
+								<p>{{ member.designation }}</p>
+								<p></p>
+								<p>{{ member.city }}, {{ member.state }}</p>
+								<div class="col-xs-4 col-md-4 date">
+									<div class="large">{{ member.employee_id }}</div>
+									<div class="text-muted">Employee ID</div>
+								</div>
+								<div class="col-xs-4 col-md-4 date">
+									<div class="large">0</div>
+									<div class="text-muted">Generated Invoices</div>
+								</div>
+								<div class="col-xs-4 col-md-4 date">
+									<div class="large">0</div>
+									<div class="text-muted">Monthly Stat</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+
+		<div class="row">
+			<legend class="text-center">THE GREENZEE TEAM</legend>
 			{% for member in all_members %}
 				<a href="{% url 'team-member' member.employee_id %}">
 					<div class="col-md-4">
