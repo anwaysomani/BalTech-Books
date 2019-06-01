@@ -74,6 +74,7 @@ class employee_table(AbstractBaseUser):
     salary = models.IntegerField(null=True, blank=True)
     joining_date = models.DateField(null=True, blank=True)
     termination_date = models.DateField(null=True, blank=True)
+    sales_executive = models.BooleanField()
 
     # notice the absence of a "Password field", that's built in.
 
