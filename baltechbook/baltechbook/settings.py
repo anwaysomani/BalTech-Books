@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'lv9o&t&#q9hnh0v&i$79(6!a**37@@nlm3bwj#%9)g4l3xwr=_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -134,7 +134,8 @@ TIME_ZONE = 'Asia/Kolkata'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-LOGIN_REDIRECT_URL = 'dashboard/'
+LOGIN_REDIRECT_URL = 'panel-redirect'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Altering default user model
 AUTH_USER_MODEL = 'accounts.employee_table'
