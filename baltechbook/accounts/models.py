@@ -91,10 +91,10 @@ class employee_table(AbstractBaseUser):
         return self.first_name
 
     def __str__(self):
-        return self.first_name + " " +  self.last_name
+        return self.email
 
     def __unicode__(self):
-        return self.first_name + " " + self.last_name
+        return self.email
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
