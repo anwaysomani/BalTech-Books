@@ -3,6 +3,9 @@ from django.db import models
 from django.core.validators import RegexValidator
 from PIL import Image
 
+# Constants
+from invoice.constants import STATES, COUNTRIES
+
 # Model for organization information on pages
 class organization_table(models.Model):
     organization_id = models.IntegerField(primary_key=True)
