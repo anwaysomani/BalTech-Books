@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 from django.db import models
 from invoice.constants import STATES, COUNTRIES, ADDRESS_TYPE
+from django.core.validators import RegexValidator
+from accounts.models import employee_table
 
 # Customer Record
 class customer_table(models.Model):
@@ -38,4 +40,16 @@ class customer_address_table(models.Model):
     class Meta:
         verbose_name = "Customer's Address"
         verbose_name_plural = "Customers Addresses"
+
+# Model for Sales Executive
+class registered_shop(models.Model):
+    shop_id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=200)
+    mobile_number = models.CharField(max_length=10, null=True, blank=True)
+    address = models.CharField(max_length=200, null=True)
+    district = models.CharField(max_length=100)
+    state = models.CharField(max_length=100, choices=STATES)
+    country = models.CharField(max_length=100, choices=COUNTRIES)
+    pincode = models.IntegerField(validators=[RegexValidator(r'^\d{1,10}$')], null=True)
+    employee_id = models.ForeignKey(employee_table, null=True)
 

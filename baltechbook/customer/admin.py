@@ -4,3 +4,5 @@ from .models import *
 
 admin.site.register(customer_table)
 admin.site.register(customer_address_table)
+
+admin.site.register(registered_shop)
