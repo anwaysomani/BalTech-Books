@@ -19,26 +19,28 @@ class products_table(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        # Assign check values to variable
-        cgst = 0
-        sgst = 0
-        igst = 0
         
-        # Fetching proportion value
-        if self.cgst_tax > 0:
-            cgst = self.cgst_tax/100
-        if self.sgst_tax > 0:
-            sgst = self.sgst_tax/100
-        if self.igst_tax > 0:
-            igst = self.igst_tax/100
+        if self.actual_price > 0:
+            # Assign check values to variable
+            cgst = 0
+            sgst = 0
+            igst = 0
+            
+            # Fetching proportion value
+            if self.cgst_tax > 0:
+                cgst = self.cgst_tax/100
+            if self.sgst_tax > 0:
+                sgst = self.sgst_tax/100
+            if self.igst_tax > 0:
+                igst = self.igst_tax/100
 
-        # Calculating value for gst's
-        cgst_value = self.actual_price * cgst
-        sgst_value = self.actual_price * sgst
-        igst_value = self.actual_price * igst
+            # Calculating value for gst's
+            cgst_value = self.actual_price * cgst
+            sgst_value = self.actual_price * sgst
+            igst_value = self.actual_price * igst
 
-        # Assigning value for post_tax_amount
-        self.post_tax_price = self.actual_price + cgst_value + sgst_value + igst_value
+            # Assigning value for post_tax_amount
+            self.post_tax_price = self.actual_price + cgst_value + sgst_value + igst_value
 
         # Calling save method
         super(products_table, self).save(*args, **kwargs)
