@@ -2,7 +2,9 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from accounts.models import *
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def dashboard(request):
     user = get_user_model()
 
