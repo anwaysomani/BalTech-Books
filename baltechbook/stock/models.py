@@ -19,7 +19,6 @@ class products_table(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        
         if self.actual_price > 0:
             # Assign check values to variable
             cgst = 0
