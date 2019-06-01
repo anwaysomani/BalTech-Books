@@ -253,7 +253,7 @@ def payment(request, id):
 
     val = 0
     for prod in all_products:
-        val = val + prod.post_tax_amount
+        val = val + prod.product_price
 
     initial_data = {
         'order_id': id,
