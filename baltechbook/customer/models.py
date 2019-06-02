@@ -8,7 +8,7 @@ from accounts.models import employee_table
 class customer_table(models.Model):
     customer_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=120)
-    email = models.EmailField()
+    email = models.EmailField(null=True, blank=True)
     mobileNumber = models.CharField(max_length=10)
 
     def __unicode__(self):
@@ -53,3 +53,4 @@ class registered_shop(models.Model):
     pincode = models.IntegerField(validators=[RegexValidator(r'^\d{1,10}$')], null=True)
     employee_id = models.ForeignKey(employee_table, null=True)
 
+    
