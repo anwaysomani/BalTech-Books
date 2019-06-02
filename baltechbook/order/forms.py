@@ -33,7 +33,7 @@ class ProductsOrderForm(forms.ModelForm):
 
 # Payment form
 class PaymentForm(forms.ModelForm):
-    sales_executive = forms.ModelChoiceField(employee_table.objects.none())
+    sales_executive = forms.ModelChoiceField(employee_table.objects.none(), required=False)
 
     class Meta:
         model = payment_table
