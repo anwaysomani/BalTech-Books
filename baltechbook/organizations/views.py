@@ -33,9 +33,14 @@ def team_member(request, emp_id):
     if count is None:
         count = 0
 
+
+    # Calculating percentage for completion
+    val = (count*100) / 500
+
     context = {
         'member': member,
         'count': count,
+        'val': val,
     }
 
     return render(request, 'team-member.html', context)
