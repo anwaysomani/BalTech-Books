@@ -22,7 +22,7 @@
 		<div class="panel panel-container">
 			<h2 class="text-center">{{ member.first_name }} {{ member.last_name }}</h2>
 			<hr>
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div class="panel panel-default ">
 					<div class="panel panel-default articles">
 						<div class="panel-heading">
@@ -86,15 +86,56 @@
 				</div>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div class="panel panel-default ">
 					<div class="panel-heading">
 						Target Acheived
 					</div>
 					<div class="panel panel-default articles">
 						<div class="panel-body easypiechart-panel">
-						<div class="easypiechart" id="easypiechart-teal" data-percent="56" ><span class="percent">56%</span></div>
+							<div class="easypiechart" id="easypiechart-teal" data-percent="56" >
+								<span class="percent">56%</span>
+							</div>
+							<div class="text-center">
+								<span style="color: red;">{{ count }}</span><span style="color: blue;">/500</span>
+							</div>
+						</div>
 					</div>
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+						Summary
+					</div>
+					<div class="panel panel-default articles">
+						<table class="table">
+							<thead>
+							  <tr>
+							    <th>Firstname</th>
+							    <th>Lastname</th>
+							    <th>Email</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+							    <td>John</td>
+							    <td>Doe</td>
+							    <td>john@example.com</td>
+							  </tr>
+							  <tr>
+							    <td>Mary</td>
+							    <td>Moe</td>
+							    <td>mary@example.com</td>
+							  </tr>
+							  <tr>
+							    <td>July</td>
+							    <td>Dooley</td>
+							    <td>july@example.com</td>
+							  </tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

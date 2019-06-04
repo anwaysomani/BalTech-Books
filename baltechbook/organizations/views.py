@@ -3,6 +3,8 @@ from django.shortcuts import render
 from accounts.models import employee_table
 from django.contrib.auth import get_user_model
 from organizations.forms import NewDistributorForm
+from order.models import order_table, product_order_table
+from django.db.models import Sum
 
 # team member view
 def team(request):
@@ -20,8 +22,12 @@ def team(request):
 def team_member(request, emp_id):
     member = employee_table.objects.get(employee_id=emp_id)
 
+    order_objs = order_table.objects.filter(employee_id=member.id).values_list('order_id', flat=True)
+    prod_objs = product_order_table.objects.filter(order_id__in=order_objs).values_list('quantity', flat=True).aggregate(Sum('quantity'))
+
     context = {
         'member': member,
+        'count': prod_objs.values()[0],
     }
 
     return render(request, 'team-member.html', context)
