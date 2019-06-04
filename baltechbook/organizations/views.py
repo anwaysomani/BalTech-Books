@@ -25,7 +25,14 @@ def team_member(request, emp_id):
     order_objs = order_table.objects.filter(employee_id=member.id).values_list('order_id', flat=True)
     prod_objs = product_order_table.objects.filter(order_id__in=order_objs).values_list('quantity', flat=True).aggregate(Sum('quantity'))
 
-    count = prod_objs.values()[0] if prod_objs else 0
+    try:
+        count = prod_objs.values()[0]
+    except:
+        count = 0
+    
+    if count is None:
+        count = 0
+
     context = {
         'member': member,
         'count': count,
