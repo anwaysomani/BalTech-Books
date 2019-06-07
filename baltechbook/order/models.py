@@ -57,7 +57,7 @@ class product_order_table(models.Model):
         sgst_value = value * sgst_proportion
         igst_value = value * igst_proportion
         final_value = value + cgst_value + sgst_value + igst_value
-        self.product_price = final_value * quant
+        self.post_tax_amount = final_value * quant
         super(product_order_table, self).save(*args, **kwargs)
 
     def __str__(self):
