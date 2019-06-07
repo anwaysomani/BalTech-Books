@@ -251,7 +251,7 @@ def payment(request, id):
     customer_info = customer_table.objects.get(customer_id=required_customer_id)
     customer_address = customer_address_table.objects.get(customer_address_id=required_address_id)
 
-    val = 0.0
+    val = 0
     for prod in all_products:
         val = val + prod.post_tax_amount
 
