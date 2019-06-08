@@ -31,7 +31,6 @@ class order_table(models.Model):
     class Meta:
         verbose_name = "Order"
         verbose_name_plural = "Orders"
-        #unique_together  = (("order_id", "order_number"))
 
 
 # Product orders
