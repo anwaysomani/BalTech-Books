@@ -247,10 +247,10 @@
 				<tr>
 					<th><span>Sales Person</span></th>
 					
-					{% if order_record.employee_id != "None" %}
-						<td><span>{{ order_record.employee_id.first_name }} {{ order_record.employee_id.last_name }}</span></td>
-					{% else %}
+					{% if order_record.employee_id == None %}
 						<td><span> - </span></td>
+					{% else %}
+						<td><span>{{ order_record.employee_id.first_name }} {{ order_record.employee_id.last_name }}</span></td>
 					{% endif %}
 				</tr>
 			</table>
