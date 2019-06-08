@@ -3,13 +3,18 @@ from .models import *
 from stock.models import products_table
 from invoice.constants import *
 
+# Changing default input format to date input
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class ProductsOrderForm(forms.ModelForm):
     class Meta:
         model = product_order_table
         fields = {'order_id', 'product_id', 'quantity', 'delivery_date', 'product_price'}
 
         widgets = {
-            'order_id': forms.TextInput(attrs={'readonly': True})
+            'order_id': forms.TextInput(attrs={'readonly': True}),
+            'delivery_date': DateInput()
         }
 
         labels = {
@@ -19,6 +24,8 @@ class ProductsOrderForm(forms.ModelForm):
             'delivery_date': 'Enter Delivery Date',
             'order_id': 'Order ID'
         }
+
+
 
     def __init__(self, *args, **kwargs):
         super(ProductsOrderForm, self).__init__(*args, **kwargs)
