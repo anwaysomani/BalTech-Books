@@ -318,7 +318,6 @@ def generate_invoice(request, id):
 from django.views.generic.edit import DeleteView
 
 def delete_product_order(request, po_id):
-    user = request.user
     pot_object = product_order_table.objects.get(product_order_id=po_id)
 
     if request.method == 'GET':
