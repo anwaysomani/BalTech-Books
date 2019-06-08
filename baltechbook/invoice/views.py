@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model
 
 # Redirect
@@ -313,4 +313,15 @@ def generate_invoice(request, id):
 
     return render(request, 'finalInvoice.html', context)
 
+
+# Delete Views
+from django.views.generic.edit import DeleteView
+
+def delete_product_order(request, po_id):
+    user = request.user
+    pot_object = product_order_table.objects.get(product_order_id=po_id)
+
+    if request.method == 'GET':
+        pot_object.delete()
+        return render(request, 'invoiceIndex/product_order_delete.html', {})
 
