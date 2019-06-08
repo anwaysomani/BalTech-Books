@@ -76,7 +76,7 @@ class payment_table(models.Model):
     actual_amount = models.DecimalField(max_digits=15, decimal_places=2)
     discount = models.IntegerField()
     payable_amount = models.DecimalField(max_digits=15, decimal_places=2)
-    mode_of_payment = models.CharField(max_length=7, choices=MODE_OF_PAYMENT, default="Cash")
+    mode_of_payment = models.CharField(max_length=10, choices=MODE_OF_PAYMENT, default="Cash")
 
     class Meta: 
         verbose_name = "Checkout"
