@@ -126,7 +126,7 @@
 					      <td>{{ products.quantity }}</td>
 					      <td>{{ products.delivery_date }}</td>
 					      <td>{{ products.product_price }}</td>
-					      <td><button class="btn btn-warning">Edit</button> <button class="btn btn-danger">Remove</button></td>
+					      <td><a href="{% url 'product_order_delete' products.product_order_id %}"><button class="btn btn-danger">Remove</button></a></td>
 					    </tr>
 				  	{% endfor %}
 				  </tbody>
