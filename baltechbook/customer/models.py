@@ -53,4 +53,10 @@ class registered_shop(models.Model):
     pincode = models.IntegerField(validators=[RegexValidator(r'^\d{1,10}$')], null=True)
     employee_id = models.ForeignKey(employee_table, null=True)
 
-    
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Registered Shop"
+        verbose_name_plural = "Registered Shops"
+
