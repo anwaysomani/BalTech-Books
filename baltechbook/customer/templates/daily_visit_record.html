@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% include 'reqs/headerBar.html' %}
+</head>
+<body>
+	{% include 'reqs/navbar.html' %}
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li class="active">Daily Visit's Record</li>
+			</ol>
+		</div>
+		
+		<div class="panel panel-container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 text-center">
+					DAILY VISITS RECORD TABLE <br><br>
+					<div class="table-responsive">
+						<table class="table table-bordered ">
+							<thead>
+								<th class="text-center">#</th>
+								<th class="text-center">Name</th>
+								<th class="text-center">Mobile Number</th>
+								<th class="text-center">Address</th>
+								<th class="text-center">District</th>
+								<th class="text-center">State</th>
+								<th class="text-center">Pincode</th>
+							</thead>
+							<tbody>
+								{% for shop in shops reversed %}
+									<tr>
+										<th>{{ forloop.revcounter }}</th>
+										<td>{{ shop.name }}</td>
+										<td>{{ shop.mobile_number }}</td>
+										<td>{{ shop.address }}</td>
+										<td>{{ shop.district }}</td>
+										<td>{{ shop.state }}</td>
+										<td>{{ shop.pincode }}</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+	{% include 'reqs/footerScripts.html' %}
+		
+</body>
+</html>
