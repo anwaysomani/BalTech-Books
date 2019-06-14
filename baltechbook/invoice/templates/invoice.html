@@ -46,35 +46,43 @@
 					Earlier Invoices
 				</div>
 				<div class="panel-body articles-container">
-					<ul style="list-style-type:none;" id="all_invoices">
-						{% for order in orders %}
-							<li>
-								<div class="article border-bottom">
-									<div class="col-xs-10">
-										<div class="row">
-											<div class="col-xs-2 col-md-2 date">
-												<div class="large">{{ order.creation_date.day }}</div>
-												<div class="text-muted">Jun</div>
-											</div>
-											<div class="col-xs-8 col-md-8">
-												<h6><a href="#">{{ order.customer_id.name }}</a></h4>
-												<p>{{ order.employee_id.first_name }} {{ order.employee_id.last_name }}</p>
-												<!-- <button class="btn-success">{{ order.status }}</button> -->
-											</div>
-											<div class="col-xs-2 col-md-2 date">
-												<a href="{% url 'final-invoice' order.order_id %}">
-													<button class="btn btn-success">
-														View Invoice
-													</button>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div class="clear"></div>
-								</div>
-							</li>
-						{% endfor %}
-					</ul>
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<th>#</th>
+								<th>Date</th>
+								<th>Customer Name</th>
+								<th>Order Number</th>
+								<!-- <th>Status</th> -->
+								<th></th>
+								<th></th>
+							</thead>
+							<tbody id="invoice_sort">
+								{% for order in orders %}
+									<tr>
+										<td>{{ forloop.revcounter }}</td>
+										<td>{{ order.creation_date }}</td>
+										<td>{{ order.customer_id.name }}</td>
+										<td>{{ order.order_number }}</td>
+										<td>
+											<a href="{% url 'final-invoice' order.order_id %}">
+												<button class="btn btn-success">
+													Invoice
+												</button>
+											</a>
+										</td>
+										<td>
+											<a href="{% url 'final-invoice' order.order_id %}">
+												<button class="btn btn-success">
+													Details
+												</button>
+											</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -85,20 +93,14 @@
 	<!-- Querying Live Customer List -->
 	<script type="text/javascript">
 		function searchFunc() {
-		    var input, filter, ul, li, a, i, txtValue;
-		    input = document.getElementById("select_invoice");
-		    filter = input.value.toUpperCase();
-		    ul = document.getElementById("all_invoices");
-		    li = ul.getElementsByTagName("li");
-		    for (i = 0; i < li.length; i++) {
-		        a = li[i].getElementsByTagName("a")[0];
-		        txtValue = a.textContent || a.innerText;
-		        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-		            li[i].style.display = "";
-		        } else {
-		            li[i].style.display = "none";
-		        }
-		    }
+		    $(document).ready(function(){
+			  $("#select_invoice").on("keyup", function() {
+			    var value = $(this).val().toLowerCase();
+			    $("#invoice_sort tr").filter(function() {
+			      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			    });
+			  });
+			});
 		}
 	</script>
 
