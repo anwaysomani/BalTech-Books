@@ -7,7 +7,13 @@
 </head>
 
 <body>
-	{% include 'reqs/navbar.html' %}
+	{% if obj.admin == 1 %}
+		{% include 'reqs/navbar.html' %}
+	{% elif obj.sales_executive == 1 %}
+		{% include 'reqs/se_navbar.html' %}
+	
+		
+	{% endif %}
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
@@ -33,7 +39,7 @@
 		<br><br>
 
 		<div class="form-group">
-			<label class="col-md-3 control-label" for="name">Search Customer</label>
+			<label class="col-md-3 control-label" for="name">Search Invoice</label>
 			<div class="col-md-9">
 				<input type="text" id="select_invoice" onkeyup="searchFunc()" placeholder="Start typing characters" title="Type in a name" class="form-control">
 			</div>
@@ -72,7 +78,7 @@
 											</a>
 										</td>
 										<td>
-											<a href="{% url 'final-invoice' order.order_id %}">
+											<a href="#">
 												<button class="btn btn-success">
 													Details
 												</button>
