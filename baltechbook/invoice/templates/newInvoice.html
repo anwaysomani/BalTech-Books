@@ -6,16 +6,12 @@
 	{% include 'reqs/headerBar.html' %}
 </head>
 
-<!-- 
-	Pattern:
-	- order_id & order_num
-	- Product to be purchased
-	- Customer information
-	- Checkout
--->
-
 <body>
-	{% include 'reqs/navbar.html' %}
+	{% if user.admin %}
+		{% include 'reqs/navbar.html' %}
+	{% else %}
+		{% include 'reqs/se_navbar.html' %}
+	{% endif %}
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
