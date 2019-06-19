@@ -3,236 +3,252 @@
 <!DOCTYPE html>
 <html>
 <head>
-	{% include 'reqs/headerBar.html' %}
-	<link rel="stylesheet" type="text/css" href="{% static 'css/customer-record.css' %}">
+    {% include 'reqs/headerBar.html' %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/customer-record.css' %}">
 
-	<style type="text/css">
-		.disable {
-			color: currentColor;
-			cursor: not-allowed;
-			opacity: 0.5;
-			text-decoration: none;
-			pointer-events: none;
-		}
-	</style>
+    <style type="text/css">
+        .disable {
+            color: currentColor;
+            cursor: not-allowed;
+            opacity: 0.5;
+            text-decoration: none;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
-	{% if user.admin %}
-		{% include 'reqs/navbar.html' %}
-	{% else %}
-		{% include 'reqs/se_navbar.html' %}
-	{% endif %}
+    {% if user.admin %}
+        {% include 'reqs/navbar.html' %}
+    {% else %}
+        {% include 'reqs/se_navbar.html' %}
+    {% endif %}
 
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-		<!-- New Invoice Begins -->
-		<nav class="navbar navbar-light bg-light">
-		  <a class="navbar-brand">
-		    <i class="fas fa-file-invoice"></i>
-		  </a>
-		  <!-- Add Items to Cart -->
-		  <a class="navbar-brand">
-		  	<i class="fas fa-long-arrow-alt-right"></i>
-		    <i class="fas fa-cart-plus"></i>
-		  </a>
-		  <!-- Customer Personal Info -->
-		  <a class="navbar-brand">
-		  	<i class="fas fa-long-arrow-alt-right"></i>
-		    <i class="fas fa-user-lock"></i>
-		  </a>
-		  <!-- Customer Location Info -->
-		  <a class="navbar-brand">
-		  	<i class="fas fa-long-arrow-alt-right"></i>
-		    <i class="fas fa-map-marked-alt"></i>
-		  </a>
-		  <!-- Checkout -->
-		  <a class="navbar-brand">
-		  	<i class="fas fa-long-arrow-alt-right"></i>
-		    <i class="fas fa-cash-register"></i>
-		  </a> 	
-		</nav>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <!-- New Invoice Begins -->
+        <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand">
+            <i class="fas fa-file-invoice"></i>
+          </a>
+          <!-- Add Items to Cart -->
+          <a class="navbar-brand">
+            <i class="fas fa-long-arrow-alt-right"></i>
+            <i class="fas fa-cart-plus"></i>
+          </a>
+          <!-- Customer Personal Info -->
+          <a class="navbar-brand">
+            <i class="fas fa-long-arrow-alt-right"></i>
+            <i class="fas fa-user-lock"></i>
+          </a>
+          <!-- Customer Location Info -->
+          <a class="navbar-brand">
+            <i class="fas fa-long-arrow-alt-right"></i>
+            <i class="fas fa-map-marked-alt"></i>
+          </a>
+          <!-- Checkout -->
+          <a class="navbar-brand">
+            <i class="fas fa-long-arrow-alt-right"></i>
+            <i class="fas fa-cash-register"></i>
+          </a>  
+        </nav>
 
 
-		<div class="row">
-			<div class="col-lg-12">
-				<h2>Checkout Review</h2>
-			</div>
-		</div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Checkout Review</h2>
+            </div>
+        </div>
 
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<h2>Payment</h2>
-				<hr>
-				<form method="POST">
-					{% csrf_token %}
-					<div class="form-group col-md-6">
-						<label>{{ payment_form.order_id.label_tag }}</label>
-						{{ payment_form.order_id }}
-						{{ payment_form.order_id.errors }}
-					</div>
-					<legend>Actual Transaction</legend>
-					<div class="form-group col-md-6">
-						<label>{{ payment_form.actual_amount.label_tag }}</label>
-						{{ payment_form.actual_amount }}
-						{{ payment_form.actual_amount.errors }}
-					</div>
-					<div class="form-group col-md-6">
-						<label>{{ payment_form.discount.label_tag }}</label>
-						{{ payment_form.discount }}
-						{{ payment_form.discount.errors }}
-					</div>
-					<legend>Final Transaction</legend>
-					<div class="form-group col-md-6">
-						<label>{{ payment_form.payable_amount.label_tag }}</label>
-						{{ payment_form.payable_amount }}
-						{{ payment_form.payable_amount.errors }}
-					</div>
-					<div class="form-group col-md-6">
-						<label>{{ payment_form.mode_of_payment.label_tag }}</label>
-						{{ payment_form.mode_of_payment }}
-						{{ payment_form.mode_of_payment.errors }}
-					</div>
-					<div class="form-group col-md-6">
-						<label>{{ payment_form.sales_executive.label_tag }}</label>
-						{{ payment_form.sales_executive }}
-						{{ payment_form.sales_executive.errors }}
-					</div>
-					<div class="form-group col-md-12">
-						<button class="btn btn-default btn-md btn-success" value="submit">
-							Generate Invoice <i class="fas fa-file-invoice"></i>
-						</button>
-					</div>
-					<hr>
-				</form>
-			</div>
-		</div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2>Payment</h2>
+                <hr>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group col-md-6">
+                        <label>{{ payment_form.order_id.label_tag }}</label>
+                        {{ payment_form.order_id }}
+                        {{ payment_form.order_id.errors }}
+                    </div>
+                    <legend>Actual Transaction</legend>
+                    <div class="form-group col-md-6">
+                        <label>{{ payment_form.actual_amount.label_tag }}</label>
+                        {{ payment_form.actual_amount }}
+                        {{ payment_form.actual_amount.errors }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>{{ payment_form.discount.label_tag }}</label>
+                        {{ payment_form.discount }}
+                        {{ payment_form.discount.errors }}
+                    </div>
+                    <legend>Final Transaction</legend>
+                    <div class="form-group col-md-6">
+                        <label>{{ payment_form.payable_amount.label_tag }}</label>
+                        {{ payment_form.payable_amount }}
+                        {{ payment_form.payable_amount.errors }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>{{ payment_form.mode_of_payment.label_tag }}</label>
+                        {{ payment_form.mode_of_payment }}
+                        {{ payment_form.mode_of_payment.errors }}
+                    </div>
 
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<h2>Products</h2>
-				<table class="table table-hover">
-					<thead>
-				      <tr>
-				        <th>Product Name</th>
-				        <th>Actual Price</th>
-				        <th>CGST</th>
-				        <th>SGST</th>
-				        <th>IGST</th>
-				        <th>Quantity</th>
-				        <th>Post Tax Amount</th>
-				      </tr>
-				    </thead>
-				    <tbody>
-						{% for object1 in all_products %}
-							<tr>
-								<td>{{ object1.product_id }}</td>
-								<td>{{ object1.product_id.actual_price }}</td>
-								<td>{{ object1.product_id.cgst_tax }}</td>
-								<td>{{ object1.product_id.sgst_tax }}</td>
-								<td>{{ object1.product_id.igst_tax }}</td>
-								<td>{{ object1.quantity }}</td>
-								<td>{{ object1.product_price }}</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-				<hr>
-			</div>
-		</div>
+                    <!-- For admin vs For sales_executive -->
+                    {% if user.admin == True %}
+                        <!-- For admin -->
+                        <div class="form-group col-md-6">
+                            <label>{{ payment_form.sales_executive.label_tag }}</label>
+                            {{ payment_form.sales_executive }}
+                            {{ payment_form.sales_executive.errors }}
+                        </div>
+                        <!-- /For admin -->
+                    {% endif %}
+                    {% if user.admin == False %}
+                        <!-- For Sales executive -->
+                        <div class="form-group col-md-6">
+                            <label>{{ payment_form.sales_executive.label_tag }}</label>
+                            <input type="text" name="sales_executive" value="{{ user.id }}" readonly required class="form-control" id="id_sales_executive" />
+                            {{ payment_form.sales_executive.errors }}
+                        </div>
+                        <!-- /For Sales executive -->
+                    {% endif %}
 
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<h2>Customer Information</h2>
-				<hr>
-				<!-- {{ customer_info }}
-				{{ customer_address }} -->
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-default btn-md btn-success" value="submit">
+                            Generate Invoice <i class="fas fa-file-invoice"></i>
+                        </button>
+                    </div>
+                    <hr>
+                </form>
+            </div>
+        </div>
 
-				
-				<table class="table table-bordered">
-				    <tr>
-				      <th>Name</th>
-				      <td>{{ customer_info.name }}</td>
-				    </tr>
-				    <tr>
-				      <th>Email</th>
-				      <td>{{ customer_info.email }}</td>
-				    </tr>
-				    <tr>
-				      <th>Mobile Number</th>
-				      <td>{{ customer_info.mobileNumber }}</td>
-				    </tr>
-				    <tr>
-				      <th>Billing/Shipping Address</th>
-				      <td>{{ customer_address.address }}, {{ customer_address.city }} - {{ customer_address.pincode }}</td>
-				    </tr>
-				    <tr>
-				      <th>State</th>
-				      <td>{{ customer_address.state }}</td>
-				    </tr>
-				    <tr>
-				      <th>Country</th>
-				      <td>{{ customer_address.country }}</td>
-				    </tr>
-				    <tr>
-				      	<th>Alternate Email</th>
-				      	{% if customer_address.email == None %}
-				      		<td> - </td>
-				      	{% else %}
-			      			<td>{{ customer_address.email }}</td>
-			      		{% endif %}
-				    </tr>
-				    <tr>
-				    	<th>Alternate Mobile Number</th>
-				      	{% if customer_address.phoneNumber == '' %}
-				      		<td> - </td>
-				      	{% else %}
-			      			<td>{{ customer_address.phoneNumber }}</td>
-			      		{% endif %}
-				    </tr>
-				    <tr>
-				      <th>Date of issuing</th>
-				      <td>{{ order_record.creation_date }}, {{order_record.creation_time }}</td>
-				    </tr>
-				</table>
-			</div>
-		</div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2>Products</h2>
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Product Name</th>
+                        <th>Actual Price</th>
+                        <th>CGST</th>
+                        <th>SGST</th>
+                        <th>IGST</th>
+                        <th>Quantity</th>
+                        <th>Post Tax Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for object1 in all_products %}
+                            <tr>
+                                <td>{{ object1.product_id }}</td>
+                                <td>{{ object1.product_id.actual_price }}</td>
+                                <td>{{ object1.product_id.cgst_tax }}</td>
+                                <td>{{ object1.product_id.sgst_tax }}</td>
+                                <td>{{ object1.product_id.igst_tax }}</td>
+                                <td>{{ object1.quantity }}</td>
+                                <td>{{ object1.product_price }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        </div>
 
-	</div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2>Customer Information</h2>
+                <hr>
+                <!-- {{ customer_info }}
+                {{ customer_address }} -->
+
+                
+                <table class="table table-bordered">
+                    <tr>
+                      <th>Name</th>
+                      <td>{{ customer_info.name }}</td>
+                    </tr>
+                    <tr>
+                      <th>Email</th>
+                      <td>{{ customer_info.email }}</td>
+                    </tr>
+                    <tr>
+                      <th>Mobile Number</th>
+                      <td>{{ customer_info.mobileNumber }}</td>
+                    </tr>
+                    <tr>
+                      <th>Billing/Shipping Address</th>
+                      <td>{{ customer_address.address }}, {{ customer_address.city }} - {{ customer_address.pincode }}</td>
+                    </tr>
+                    <tr>
+                      <th>State</th>
+                      <td>{{ customer_address.state }}</td>
+                    </tr>
+                    <tr>
+                      <th>Country</th>
+                      <td>{{ customer_address.country }}</td>
+                    </tr>
+                    <tr>
+                        <th>Alternate Email</th>
+                        {% if customer_address.email == None %}
+                            <td> - </td>
+                        {% else %}
+                            <td>{{ customer_address.email }}</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Alternate Mobile Number</th>
+                        {% if customer_address.phoneNumber == '' %}
+                            <td> - </td>
+                        {% else %}
+                            <td>{{ customer_address.phoneNumber }}</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                      <th>Date of issuing</th>
+                      <td>{{ order_record.creation_date }}, {{order_record.creation_time }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
 
 {% include 'reqs/footerScripts.html' %}
 
-	<!-- Fetching value from list to input area for form -->
-	<script>
-		$("#existing_addresses_list").on("click", "a", function(e){
-		    e.preventDefault();
-		    var $this = $(this).parent();
-		    $this.addClass("select").siblings().removeClass("select");
-		    $("#id_customer_address").val($this.data("value"));
-		});
+    <!-- Fetching value from list to input area for form -->
+    <script>
+        $("#existing_addresses_list").on("click", "a", function(e){
+            e.preventDefault();
+            var $this = $(this).parent();
+            $this.addClass("select").siblings().removeClass("select");
+            $("#id_customer_address").val($this.data("value"));
+        });
 
-		$("form[name=existing_customer_address]").submit(function(e) {
-		    if ($(this).find("li.select").length == 0) {
-		        alert( "Please select an address...or add a New One!" );
-		        e.preventDefault();
-		    }
-		});
-	</script>
+        $("form[name=existing_customer_address]").submit(function(e) {
+            if ($(this).find("li.select").length == 0) {
+                alert( "Please select an address...or add a New One!" );
+                e.preventDefault();
+            }
+        });
+    </script>
 
-	<!-- JQeury func to automatically change final amount field value, based on discount selection -->
-	<script type="text/javascript">
-		$(document).ready(function()
-		{
-		    function updatePrice()
-		    {
-		        var price = parseFloat($("#id_discount").val());
-		        var actual_amount = parseFloat($("#id_actual_amount").val());
-		        var total = actual_amount - price;
-		        var total = total.toFixed(2);
-		        $("#id_payable_amount").val(total);
-		    }
-		    $(document).on("change, keyup", "#id_discount", updatePrice);
-		});
-	</script>
+    <!-- JQeury func to automatically change final amount field value, based on discount selection -->
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            function updatePrice()
+            {
+                var price = parseFloat($("#id_discount").val());
+                var actual_amount = parseFloat($("#id_actual_amount").val());
+                var total = actual_amount - price;
+                var total = total.toFixed(2);
+                $("#id_payable_amount").val(total);
+            }
+            $(document).on("change, keyup", "#id_discount", updatePrice);
+        });
+    </script>
 
 </body>
 </html>
