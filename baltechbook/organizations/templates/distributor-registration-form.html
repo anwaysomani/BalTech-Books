@@ -16,38 +16,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<!-- Top Bar -->
-	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span style="color: green;">Greenzee India</span> Ltd.</a>
-			</div>
-		</div>
-	</nav>
+	{% if user.admin %}
+		{% include 'reqs/navbar.html' %}
+	{% else %}
+		{% include 'reqs/se_navbar.html' %}
+	{% endif %}
 
-	<!-- Side Navigation Bar -->
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<div class="profile-sidebar">
-			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
-			</div>
-			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">{{ user.first_name }}</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-		<div class="divider"></div>
-		<ul class="nav menu">
-			<li><a href=""><i class="fas fa-store"></i>&nbsp; Register Shop</a></li>
-			<li><a href="{% url 'logout' %}"><i class="fas fa-power-off"></i>&nbsp; Logout</a></li>
-		</ul>
-	</div>
-		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<div class="col-lg-12">
