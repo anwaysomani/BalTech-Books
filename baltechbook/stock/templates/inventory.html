@@ -4,6 +4,25 @@
 <html>
 <head>
 	{% include 'reqs/headerBar.html' %}
+	<style type="text/css">
+		.scrollmenu {
+		  background-color: #333;
+		  overflow: auto;
+		  white-space: nowrap;
+		}
+
+		.scrollmenu a {
+		  display: inline-block;
+		  color: white;
+		  text-align: center;
+		  padding: 14px;
+		  text-decoration: none;
+		}
+
+		.scrollmenu a:hover {
+		  background-color: #777;
+		}
+	</style>
 </head>
 <body>
 	{% include 'reqs/navbar.html' %}
@@ -20,9 +39,15 @@
 
 		<div class="row">
 			<legend class="text-center">GREENZEE PRODUCTS</legend>
+
 			<a href="">
-				<button type="button" class="btn btn-md btn-primary" style="width: 100%;">
-					Create A New Product
+				<button type="button" class="btn btn-md btn-primary" style="width: 49%;">
+					Add A Product
+				</button>
+			</a>
+			<a href="">
+				<button type="button" class="btn btn-md btn-primary" style="width: 49%;">
+					Stock History
 				</button>
 			</a>
 			<br><br>
@@ -36,34 +61,32 @@
 							<div class="panel-body">
 								<p>{{ product.description }}</p>
 								<hr>
-								<div class="form-group">
-									<label class="col-md-4 control-label" for="name">Actual Amount</label>
-									<div class="col-md-8">
-										{{ product.actual_price }}
-									</div>
-								</div>
+								
 							</div>
 						</div>
 					</div>
 				</a>
 			{% endfor %}
-		</div>
-	</div>
 
-	<!-- <div class="row progress-labels">
-		<div class="col-sm-6">New Orders</div>
-		<div class="col-sm-6" style="text-align: right;">80%</div>
+			<!-- <div class="col-md-4">
+				<div class="row progress-labels">
+					<div class="col-sm-6">New Orders</div>
+					<div class="col-sm-6" style="text-align: right;">80%</div>
+				</div>
+				<div class="progress">
+					<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+				<div class="row progress-labels">
+					<div class="col-sm-6">New Orders</div>
+					<div class="col-sm-6" style="text-align: right;">80%</div>
+				</div>
+				<div class="progress">
+					<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div> -->
+		</div>
+
 	</div>
-	<div class="progress">
-		<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-	</div>
-	<div class="row progress-labels">
-		<div class="col-sm-6">New Orders</div>
-		<div class="col-sm-6" style="text-align: right;">80%</div>
-	</div>
-	<div class="progress">
-		<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-	</div> -->
 	
 	{% include 'reqs/footerScripts.html' %}
 		
