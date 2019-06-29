@@ -44,52 +44,102 @@
 		</div>
 
 		<br><hr>
-		<div class="col-md-12">
-			<div class="panel panel-default articles">
-				<div class="panel-heading">
-					Earlier Invoices
-				</div>
-				<div class="panel-body articles-container">
-					<div class="table-responsive">
-						<table class="table table-bordered">
-							<thead>
-								<th>#</th>
-								<th>Date</th>
-								<th>Customer Name</th>
-								<th>Order Number</th>
-								<!-- <th>Status</th> -->
-								<th></th>
-								<th></th>
-							</thead>
-							<tbody id="invoice_sort">
-								{% for order in orders %}
-									<tr>
-										<td>{{ forloop.revcounter }}</td>
-										<td>{{ order.creation_date }}</td>
-										<td>{{ order.customer_id.name }}</td>
-										<td>{{ order.order_number }}</td>
-										<td>
-											<a href="{% url 'final-invoice' order.order_id %}">
-												<button class="btn btn-success">
-													Invoice
-												</button>
-											</a>
-										</td>
-										<td>
-											<a href="#">
-												<button class="btn btn-success">
-													Details
-												</button>
-											</a>
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
+		{% if user.admin == True %}
+			<div class="col-md-12">
+				<div class="panel panel-default articles">
+					<div class="panel-heading">
+						Earlier Invoices
+					</div>
+					<div class="panel-body articles-container">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<th>#</th>
+									<th>Date</th>
+									<th>Customer Name</th>
+									<th>Order Number</th>
+									<!-- <th>Status</th> -->
+									<th></th>
+									<th></th>
+								</thead>
+								<tbody id="invoice_sort">
+									{% for order in orders %}
+										<tr>
+											<td>{{ forloop.revcounter }}</td>
+											<td>{{ order.creation_date }}</td>
+											<td>{{ order.customer_id.name }}</td>
+											<td>{{ order.order_number }}</td>
+											<td>
+												<a href="{% url 'final-invoice' order.order_id %}">
+													<button class="btn btn-success">
+														Invoice
+													</button>
+												</a>
+											</td>
+											<td>
+												<a href="#">
+													<button class="btn btn-success">
+														Details
+													</button>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		{% endif %}
+		{% if user.admin == False %}
+			<div class="col-md-12">
+				<div class="panel panel-default articles">
+					<div class="panel-heading">
+						Earlier Invoices
+					</div>
+					<div class="panel-body articles-container">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<th>#</th>
+									<th>Date</th>
+									<th>Customer Name</th>
+									<th>Order Number</th>
+									<!-- <th>Status</th> -->
+									<th></th>
+									<th></th>
+								</thead>
+								<tbody id="invoice_sort">
+									{% for order in specific_order %}
+										<tr>
+											<td>{{ forloop.revcounter }}</td>
+											<td>{{ order.creation_date }}</td>
+											<td>{{ order.customer_id.name }}</td>
+											<td>{{ order.order_number }}</td>
+											<td>
+												<a href="{% url 'final-invoice' order.order_id %}">
+													<button class="btn btn-success">
+														Invoice
+													</button>
+												</a>
+											</td>
+											<td>
+												<a href="#">
+													<button class="btn btn-success">
+														Details
+													</button>
+												</a>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
 	</div>
 
 	{% include 'reqs/footerScripts.html' %}

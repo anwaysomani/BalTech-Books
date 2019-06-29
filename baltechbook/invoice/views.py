@@ -27,10 +27,12 @@ def invoice(request):
     organization_id = organization.organization_id
 
     orders = order_table.objects.all().order_by('-order_id')
+    specific_order = order_table.objects.filter(employee_id=request.user)
 
     context = {
         'organization_id': organization_id,
         'orders': orders,
+        'specific_order': specific_order,
     }
 
     return render(request, 'invoice.html', context)
