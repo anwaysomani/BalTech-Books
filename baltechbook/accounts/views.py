@@ -12,9 +12,10 @@ def login(request):
 class PanelRedirectView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         check = self.request.user.sales_executive
-        print(check)
         if check == True:
             return reverse('distributor-form')
         else:
             return reverse('dashboard')
 
+def logout(request):
+    return render(request, '', {})
